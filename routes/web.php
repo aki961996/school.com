@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ForgetController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [LoginController::class, 'index'])->name('index');
+Route::get('/', [LoginController::class, 'login'])->name('main-logn');
+Route::post('login', [LoginController::class, 'AuthLogin'])->name('login');
+
+Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::get('forgot-password', [ForgetController::class, 'forgotPassword'])->name('forgot-password');
+
+
 
 Route::get('admin/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
