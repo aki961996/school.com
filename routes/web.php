@@ -22,11 +22,13 @@ Route::post('login', [LoginController::class, 'AuthLogin'])->name('login');
 
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
+
+//forgetpassword
 Route::get('forgot-password', [ForgetController::class, 'forgotPassword'])->name('forgot-password');
-
-
-
-
+Route::post('forgot-password', [ForgetController::class, 'postForgotPassword'])->name('post-forgot-password');
+//eth mail btn get req aan
+Route::get('reset/{token}', [ForgetController::class, 'resetPassword'])->name('reset');
+Route::post('reset/{token}', [ForgetController::class, 'postReset'])->name('Post-reset');
 
 
 Route::get('admin/admin/list', function () {
@@ -47,12 +49,12 @@ Route::middleware(['admin'])->group(function () {
 
 
 Route::middleware(['teacher'])->group(function () {
-    Route::get('teacher/dashboard', [DashboardController::class, 'dashboard'])->name('teacher-dashboard');
+    Route::get('teacher/admin/dashboard', [DashboardController::class, 'dashboard'])->name('teacher-dashboard');
 });
 Route::middleware(['student'])->group(function () {
-    Route::get('student/dashboard', [DashboardController::class, 'dashboard'])->name('student-dashboard');
+    Route::get('student//admin/dashboard', [DashboardController::class, 'dashboard'])->name('student-dashboard');
 });
 
 Route::middleware(['parent'])->group(function () {
-    Route::get('parent/dashboard', [DashboardController::class, 'dashboard'])->name('parent-dashboard');
+    Route::get('parent/admin/dashboard', [DashboardController::class, 'dashboard'])->name('parent-dashboard');
 });
