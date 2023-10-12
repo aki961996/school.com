@@ -63,13 +63,6 @@
                     </div>
                 </form>
 
-
-
-                <p class="mb-1 ">
-                    <br />
-                    <a href="{{route('main-logn')}}">Login</a>
-                </p>
-
             </div>
             <!-- /.card-body -->
         </div>

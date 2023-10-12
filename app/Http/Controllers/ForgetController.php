@@ -27,7 +27,7 @@ class ForgetController extends Controller
             Mail::to($user->email)->send(new ForgotPasswordMail($user));
             return redirect()->route('forgot-password')->with('success', 'Please check your email and reset your password');
         } else {
-            return redirect()->route('forgot-password')->with('error', 'Email Not There');
+            return redirect()->route('forgot-password')->with('error', 'Email not found in the system');
         }
     }
     public function resetPassword($token)
@@ -51,7 +51,7 @@ class ForgetController extends Controller
             $user->remember_token = Str::random(30);
             $user->save();
 
-            return redirect()->route('main-logn')->with('success', 'Password Reset Successfully');
+            return redirect()->route('main-logn')->with('success', 'Password Successfully Reset');
         } else {
 
             return redirect()->back()->with('error', 'Password and Confirm password does not match');
