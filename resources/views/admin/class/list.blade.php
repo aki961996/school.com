@@ -93,6 +93,25 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach($classModel as $d)
+                                                <tr>
+                                                    {{-- <th scope="row">{{$client->firstItem() + $loop->index}}</th>
+                                                    --}}
+                                                    {{-- <td>{{$classModel->firstItem() + $loop->index}}</td> --}}
+                                                    <td>{{$d->id}}</td>
+                                                    <td>{{$d->name}}</td>
+                                                    <td>{{$d->status_text}}</td>
+
+                                                    <td>{{$d->created_by}}</td>
+                                                    <td>{{$d->created_at}}</td>
+                                                    <td><a href="{{route('edit', encrypt($d->id))}}"
+                                                            class="btn btn-primary">Edit</a>
+                                                    </td>
+                                                    <td><a href="{{route('delete',encrypt($d->id))}}"
+                                                            class="btn btn-danger">Delete</a>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
 
                                             </tbody>
                                         </table>

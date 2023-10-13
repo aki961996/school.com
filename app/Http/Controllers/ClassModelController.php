@@ -14,8 +14,9 @@ class ClassModelController extends Controller
 
     {
         $ClassModel = ClassModel::getAllAdminData();
+        //dd($ClassModel);
         $data['header_title'] = "Class List";
-        return view('admin.class.list', $data);
+        return view('admin.class.list', $data, ['classModel' => $ClassModel]);
     }
 
     public function add()
@@ -34,7 +35,8 @@ class ClassModelController extends Controller
         $class_model = new ClassModel();
         $class_model->name = $request->name;
         $class_model->status = $request->status;
-        $class_model->created_by = $request->by;
+        $class_model->created_by = $request->created_by;
+
 
 
         $class_model->save();
