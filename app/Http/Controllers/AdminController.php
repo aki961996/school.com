@@ -8,12 +8,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 
 
 class AdminController extends Controller
 {
     public function list()
     {
+
         $data['header_title'] = "Admin List";
         $users = User::getAdmin();
         return view('admin.admin.list', $data, ['users' => $users]);
@@ -27,18 +29,15 @@ class AdminController extends Controller
     public function insert(Request $request)
     {
         $request->validate([
+            'name' => 'required',
             'email' => 'required|email|unique:users',
         ]);
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-
-
         $user->user_type = 1;
-
         $user->save();
-
         return redirect()->route('admin-list')->with('success', 'New Admin successfully addedd');
     }
 
@@ -47,6 +46,7 @@ class AdminController extends Controller
         // $id = decrypt($id);
         // $AdminsData = User::find($id);
         $AdminsData = User::getSingle($id);
+        // dd($AdminsData);
         if (!empty($AdminsData)) {
             $data['header_title'] = "Edit Admin";
             return view("admin.admin.edit", $data, ['admins' => $AdminsData]);
@@ -60,6 +60,7 @@ class AdminController extends Controller
 
         $id = $request->id;
         $request->validate([
+            'name' => 'required',
 
             'email' => 'required|email|unique:users,email,' . $id
 

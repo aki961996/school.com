@@ -28,7 +28,7 @@
 
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="{{route('update')}}" method="post">
+                        <form action="{{route('Update')}}" method="post">
                             @csrf
                             <input type="hidden" name="id" value="{{$admins->id}}" class="form-control" id=""
                                 placeholder="">

@@ -28,7 +28,7 @@
 
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="{{route('add')}}" method="post">
+                        <form action="{{route('ClassAdd')}}" method="post">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
@@ -41,19 +41,31 @@
 
                                 {{-- created by --}}
 
-                                <div>
+                                {{-- <div class="form-group">
                                     <label for="created_by">Created By:</label>
                                     <select id="created_by" name="created_by">
-                                        <option value="" selected disabled>Select a user</option>
+                                        <option value="" selected disabled>Select a admin</option>
                                         @foreach($users as $user)
                                         <option value="{{ $user->id }}">{{ $user->name }}</option>
                                         @endforeach
                                     </select>
+                                </div> --}}
+
+                                <div class="form-group">
+                                    <label>Created By</label>
+                                    {{-- value 1 vann active selectil --}}
+                                    <select class="form-control" value="" name="created_by">
+                                        <option value="" selected disabled>Select a admin</option>
+                                        @foreach($users as $user)
+                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                        @endforeach
+                                    </select>
+
                                 </div>
 
 
 
-                                <div>
+                                {{-- <div>
                                     <label for="status">Status:</label>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="0"
@@ -65,6 +77,14 @@
                                             name="status">
                                         <label class="form-check-label" for="inlineCheckbox2">Inactive</label>
                                     </div>
+                                </div> --}}
+                                <div class="form-group">
+                                    <label>status</label>
+                                    <select class="form-control" name="status">
+                                        <option value="0">Active</option>
+                                        <option value="1">Inactive</option>
+                                    </select>
+
                                 </div>
 
 

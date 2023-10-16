@@ -46,15 +46,18 @@ Route::middleware(['admin'])->group(function () {
     Route::get('admin/admin/add', [AdminController::class, 'add'])->name('admin-add');
     Route::post('admin/admin/add', [AdminController::class, 'insert'])->name('add');
     Route::get('admin/admin/edit/{id}', [AdminController::class, 'edit'])->name('edit');
-    Route::post('admin/admin/update', [AdminController::class, 'update'])->name('update');
-    Route::get('admin/admin/delete/{i}', [AdminController::class, 'delete'])->name('delete');
+    Route::post('admin/admin/update', [AdminController::class, 'update'])->name('Update');
+    Route::get('admin/admin/delete/{id}', [AdminController::class, 'delete'])->name('delete');
 
     //search
     // Route::get('admin/admin/search', [AdminController::class, 'search'])->name('search');
     //class
     Route::get('admin/class/list', [ClassModelController::class, 'list'])->name('class-list');
     Route::get('admin/class/add', [ClassModelController::class, 'add'])->name('class-add');
-    Route::post('admin/class/add', [ClassModelController::class, 'insert'])->name('add');
+    Route::post('admin/class/add', [ClassModelController::class, 'ClassAdd'])->name('ClassAdd');
+    Route::get('admin/class/edit/{id}', [ClassModelController::class, 'ClassEdit'])->name('ClassEdit');
+    Route::get('admin/class/delete/{id}', [ClassModelController::class, 'classDelete'])->name('classDelete');
+    Route::post('admin/class/update', [ClassModelController::class, 'classUpdate'])->name('classUpdate');
 });
 
 Route::middleware(['teacher'])->group(function () {

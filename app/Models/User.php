@@ -12,6 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Request;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -67,6 +68,11 @@ class User extends Authenticatable
     //get single data with id 
     static public function getSingle($id)
     {
+
+        // $user = DB::table('users')->where('id', '$id')->first();
+
+        // return $user;
+
         $id = decrypt($id);
         return User::find($id);
     }

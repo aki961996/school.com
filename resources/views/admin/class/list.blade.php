@@ -35,16 +35,38 @@
         <form action="" method="get">
             <div class="card-body">
                 <div class="row">
+                    {{-- name --}}
                     <div class="form-group col-sm-3">
                         <label for="">Name</label>
                         <input type="text" name="name" value="{{Request::get('name')}}" class="form-control" id=""
                             placeholder="Enter name">
                     </div>
-                    <div class="form-group col-sm-3">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="text" name="email" value="{{Request::get('email')}}" class="form-control"
-                            id="exampleInputEmail1" placeholder="Enter email">
+
+                    {{-- created by --}}
+                    <div>
+                        <label for="created_by">Created By:</label>
+                        <select id="created_by" name="created_by">
+                            <option value="" selected disabled>Select a admin</option>
+                            @foreach($users as $user)
+                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
+                    {{-- status --}}
+                    <div>
+                        <label for="status">Status:</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="0"
+                                name="status">
+                            <label class="form-check-label" for="inlineCheckbox1">Active</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="1"
+                                name="status">
+                            <label class="form-check-label" for="inlineCheckbox2">Inactive</label>
+                        </div>
+                    </div>
+                    {{-- date --}}
                     <div class="form-group col-sm-3">
                         <label for="exampleInputEmail1">Date</label>
                         <input type="date" name="date" value="{{Request::get('date')}}" class="form-control" id=""
@@ -101,13 +123,12 @@
                                                     <td>{{$d->id}}</td>
                                                     <td>{{$d->name}}</td>
                                                     <td>{{$d->status_text}}</td>
-
-                                                    <td>{{$d->created_by}}</td>
-                                                    <td>{{$d->created_at}}</td>
-                                                    <td><a href="{{route('edit', encrypt($d->id))}}"
+                                                    <td>{{$d->created_by_text}}</td>
+                                                    <td>{{$d->created_at_formated}}</td>
+                                                    <td><a href="{{route('ClassEdit', encrypt($d->id))}}"
                                                             class="btn btn-primary">Edit</a>
                                                     </td>
-                                                    <td><a href="{{route('delete',encrypt($d->id))}}"
+                                                    <td><a href="{{route('classDelete',encrypt($d->id))}}"
                                                             class="btn btn-danger">Delete</a>
                                                     </td>
                                                 </tr>
@@ -118,6 +139,11 @@
                                     </div>
 
                                     {{-- {{ $users->links() }} --}}
+                                    <div style="padding: 10px; float:right;">
+                                        {!!
+                                        $classModel->appends(\Illuminate\Support\Facades\Request::except('page'))->links()
+                                        !!}
+                                    </div>
 
 
 
