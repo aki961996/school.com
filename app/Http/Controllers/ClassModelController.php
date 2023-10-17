@@ -6,7 +6,7 @@ use App\Models\ClassModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
-
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class ClassModelController extends Controller
 {
@@ -20,14 +20,10 @@ class ClassModelController extends Controller
         //     return $d;
         // }
 
-
         $ClassModel = ClassModel::getAllAdminData();
-        //dd($ClassModel);
-
         $users = User::all();
-        // dd($users);
         $data['header_title'] = "Class List";
-        return view('admin.class.list', $data, ['classModel' => $ClassModel, 'users' => $users],);
+        return view('admin.class.list', $data, ['classModel' => $ClassModel, 'users' => $users]);
     }
 
     public function add()
@@ -39,26 +35,38 @@ class ClassModelController extends Controller
     }
     public function ClassAdd(Request $request)
     {
-        // dd($request->all());
-        // $request->validate([
-        //     'email' => 'required|email|unique:users',
-        // ]);
-        $class_model = new ClassModel();
-        $class_model->name = $request->name;
-        $class_model->status = $request->status;
-        $class_model->created_by = $request->created_by;
 
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'status' => 'required',
 
+        ]);
+        // $class_model = new ClassModel();
+        // $class_model->name = $request->name;
+        // $class_model->status = $request->status;
+        // $class_model->created_by = auth()->user()->id;
+        // dd($class_model->created_by);
+        $post = ClassModel::create([
+            'name' => $validatedData['name'],
+            'status' => $validatedData['status'],
+            'created_by' => Auth::user()->id,
+        ]);
 
-        $class_model->save();
+        // $class_model->save();
+        // return response()->json(['message' => 'Post created successfully', 'post' => $post], 201);
 
-        return redirect()->route('class-list')->with('success', 'New Class successfully addedd');
+        return redirect()->route('class-list')->with('success', 'Class created successfully');
     }
     public function ClassEdit($id)
     {
-        $data['header_title'] = "Class Edit";
+
         $dataAdmin = ClassModel::getSingleData($id);
-        return view('admin.class.edit', $data, ['admin' => $dataAdmin]);
+        if (!empty($dataAdmin)) {
+            $data['header_title'] = "Class Edit";
+            return view('admin.class.edit', $data, ['admin' => $dataAdmin]);
+        } else {
+            abort(404);
+        }
     }
 
     //delete
@@ -80,8 +88,8 @@ class ClassModelController extends Controller
     {
 
         $AdminsData = ClassModel::getSingleData($id);
-        //$AdminsData->is_delete = 1;
-        $AdminsData->delete();
+        $AdminsData->is_delete = 1;
+        $AdminsData->save();
         return redirect()->route('class-list')->with('success', 'Data Deleted Successfully');
     }
 }

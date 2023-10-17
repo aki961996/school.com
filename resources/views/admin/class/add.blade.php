@@ -51,9 +51,9 @@
                                     </select>
                                 </div> --}}
 
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label>Created By</label>
-                                    {{-- value 1 vann active selectil --}}
+                                    value 1 vann active selectil
                                     <select class="form-control" value="" name="created_by">
                                         <option value="" selected disabled>Select a admin</option>
                                         @foreach($users as $user)
@@ -61,7 +61,7 @@
                                         @endforeach
                                     </select>
 
-                                </div>
+                                </div> --}}
 
 
 

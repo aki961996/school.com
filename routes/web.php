@@ -5,6 +5,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ForgetController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ClassModelController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SubjectController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
@@ -51,13 +53,25 @@ Route::middleware(['admin'])->group(function () {
 
     //search
     // Route::get('admin/admin/search', [AdminController::class, 'search'])->name('search');
-    //class
+
+    //class urls
     Route::get('admin/class/list', [ClassModelController::class, 'list'])->name('class-list');
     Route::get('admin/class/add', [ClassModelController::class, 'add'])->name('class-add');
     Route::post('admin/class/add', [ClassModelController::class, 'ClassAdd'])->name('ClassAdd');
     Route::get('admin/class/edit/{id}', [ClassModelController::class, 'ClassEdit'])->name('ClassEdit');
     Route::get('admin/class/delete/{id}', [ClassModelController::class, 'classDelete'])->name('classDelete');
     Route::post('admin/class/update', [ClassModelController::class, 'classUpdate'])->name('classUpdate');
+
+    //subject urls
+    Route::get('admin/subject/list', [SubjectController::class, 'index'])->name('subject-list');
+
+
+
+
+    //products usrl
+    Route::get('admin/product/list', [ProductController::class, 'index'])->name('product-list');
+    Route::get('admin/product/create', [ProductController::class, 'create'])->name('product-create');
+    Route::post('admin/product/store', [ProductController::class, 'store'])->name('product-store');
 });
 
 Route::middleware(['teacher'])->group(function () {

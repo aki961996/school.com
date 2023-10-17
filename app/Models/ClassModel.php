@@ -7,16 +7,34 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
 
+use function PHPSTORM_META\map;
+
 class ClassModel extends Model
 {
     use HasFactory;
+
+    protected $table = "class_models";
 
     protected $fillable = [
         'name',
         'status',
         'created_by',
+        'is_delete'
 
     ];
+
+
+
+    //joining users tabel cretaed ayaa ale kitan
+    static public function getCretedDataOnly()
+    {
+        $return = ClassModel::select('*')
+            ->join('users', 'users.id', 'class_models.created_by')
+            ->orderBy('class_models.id', 'desc');
+
+
+        return $return;
+    }
 
 
     //dummy
@@ -89,7 +107,11 @@ class ClassModel extends Model
     static public function getAllAdminData()
     {
         $return = ClassModel::select('*')
-            ->whereIn('status', [0, 1]);
+
+            ->whereIn('status', [0, 1])
+            // ->whereIn('class_models.is_delete', '=' 0);
+            ->where('is_delete', "=", 0);
+
 
         // ->orWhereIn('value', ['red', 'white'])
 
@@ -111,8 +133,10 @@ class ClassModel extends Model
             $return = $return->where('created_at', 'like', '%' . $name . '%');
         }
 
+
         $return = $return->orderBy('id', 'Asc')
             ->paginate(3);
+
 
         return $return;
     }
