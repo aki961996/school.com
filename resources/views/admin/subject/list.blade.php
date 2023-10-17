@@ -10,13 +10,13 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                {{-- <div class="col-sm-6">
-                    <h1>Admin List (Total : {{$users->total()}})</h1>
-                </div> --}}
+                <div class="col-sm-6">
+                    <h1>Subject List (Total : {{$getRecord->total()}})</h1>
+                </div>
 
-                {{-- <div class="col-sm-6" style="text-align: right">
-                    <a href="{{route('admin-add')}}" class="btn btn-primary">Add new Subject</a>
-                </div> --}}
+                <div class="col-sm-6" style="text-align: right">
+                    <a href="{{route('subject-add')}}" class="btn btn-primary">Add new Subject</a>
+                </div>
 
             </div>
         </div><!-- /.container-fluid -->
@@ -28,7 +28,7 @@
     <div class="card">
         <div class="card-header">
             <div class="card-title">
-                Search Subject List
+                Search Suject List
             </div>
         </div>
 
@@ -42,21 +42,32 @@
 
 
                     <div class="form-group col-sm-3">
-                        <label for="">Name</label>
+                        <label for="">Subject Name</label>
                         <input type="text" name="name" value="{{Request::get('name')}}" class="form-control" id=""
                             placeholder="Enter name">
 
 
                     </div>
-                    <div class="form-group col-sm-3">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="text" name="email" value="{{Request::get('email')}}" class="form-control"
-                            id="exampleInputEmail1" placeholder="Enter email">
 
+                    <div class="form-group">
+                        <label> Subject Type</label>
+                        {{-- value 1 vann active selectil --}}
+                        <select class="form-control" value="" name="type">
+                            <option value="">Select
+                            </option>
+                            <option {{(Request::get('type')=='Theory' ) ? 'selected' : '' }} value="Theory">Theory
+                            </option>
+                            <option {{(Request::get('type')=='Practical' ) ? 'selected' :''}} value="Practical">
+                                Practical
+                            </option>
+
+
+                        </select>
 
                     </div>
+
                     <div class="form-group col-sm-3">
-                        <label for="exampleInputEmail1">Date</label>
+                        <label for="exampleInputEmail1">Created Date</label>
                         <input type="date" name="date" value="{{Request::get('date')}}" class="form-control" id=""
                             placeholder="Enter date">
 
@@ -66,7 +77,7 @@
 
                         <button class="btn btn-primary" type="submit" style="margin-top: 30px">Search</button>
 
-                        <a href="{{route('admin-list')}}" class="btn btn-success" style="margin-top: 30px">Reset</a>
+                        <a href="{{route('subject-list')}}" class="btn btn-success" style="margin-top: 30px">Reset</a>
                     </div>
                 </div>
 
@@ -99,9 +110,9 @@
 
                                         </div>
 
-                                        {{-- <div class="card-tools">
-                                            <h3 style="color: rgba(39, 6, 82)">{{"Page :".$users->count()}}</h3>
-                                        </div> --}}
+                                        <div class="card-tools">
+                                            <h3 style="color: rgba(39, 6, 82)">{{"Page :".$getRecord->count()}}</h3>
+                                        </div>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body table-responsive p-0">
@@ -109,25 +120,30 @@
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th>Name</th>
-                                                    <th>Email</th>
-                                                    <th>Created_at</th>
+                                                    <th>Subject Name</th>
+                                                    <th> Subject Type</th>
+                                                    <th> Status</th>
+                                                    <th> Created By</th>
+
+                                                    <th>Created date</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($getRecord as $user)
+                                                @foreach ($getRecord as $data)
                                                 <tr>
                                                     {{-- <th scope="row">{{$client->firstItem() + $loop->index}}</th>
                                                     --}}
                                                     <td>{{$getRecord->firstItem() + $loop->index}}</td>
-                                                    <td>{{$user->name}}</td>
-                                                    <td>{{$user->email}}</td>
-                                                    <td>{{$user->created_at_formated}}</td>
-                                                    <td><a href="{{route('edit', encrypt($user->id))}}"
+                                                    <td>{{$data->name}}</td>
+                                                    <td>{{$data->type}}</td>
+                                                    <td>{{$data->status_text}}</td>
+                                                    <td>{{$data->created_by_name}}</td>
+                                                    <td>{{$data->created_at_formated}}</td>
+                                                    <td><a href="{{route('subject-edit', encrypt($data->id))}}"
                                                             class="btn btn-primary">Edit</a>
                                                     </td>
-                                                    <td><a href="{{route('delete',encrypt($user->id))}}"
+                                                    <td><a href="{{route('subject-destroy',encrypt($data->id))}}"
                                                             class="btn btn-danger">Delete</a>
                                                     </td>
                                                 </tr>

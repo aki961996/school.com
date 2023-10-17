@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSubjectRequest;
 use App\Http\Requests\UpdateSubjectRequest;
 use App\Models\Subject;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class SubjectController extends Controller
 {
@@ -17,6 +18,7 @@ class SubjectController extends Controller
 
         $data['header_title'] = "Subject List";
         $data['getRecord'] = Subject::getRecord();
+        //  dd($data);
 
         return view('admin.subject.list', $data);
     }
@@ -26,7 +28,9 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        //
+        $data['header_title'] = "Add Subject";
+
+        return view('admin.subject.add', $data);
     }
 
     /**
@@ -34,7 +38,15 @@ class SubjectController extends Controller
      */
     public function store(StoreSubjectRequest $request)
     {
-        //
+        // dd($request->all());
+        $subjects = new Subject();
+        $subjects->name = $request->name;
+        $subjects->type = $request->type;
+        $subjects->status = $request->status;
+        $subjects->created_by = Auth::user()->id;
+        $subjects->save();
+
+        return redirect()->route('subject-list')->with('success', 'New Subject successfully addedd');
     }
 
     /**
@@ -42,15 +54,21 @@ class SubjectController extends Controller
      */
     public function show(Subject $subject)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Subject $subject)
+    public function edit(Request $request, $id)
     {
-        //
+        $subjects = Subject::getSingle($id);
+        if (!empty($subjects)) {
+            $data['header_title'] = "Edit Subject";
+
+            return view('admin.subject.edit', $data, ['subjects' => $subjects]);
+        } else {
+            abort(404);
+        }
     }
 
     /**
@@ -58,14 +76,23 @@ class SubjectController extends Controller
      */
     public function update(UpdateSubjectRequest $request, Subject $subject)
     {
-        //
+        $id = $request->id;
+        $subjects = Subject::getSingleDataNeedUpdate($id);
+        $subjects->name = $request->name;
+        $subjects->status = $request->status;
+        $subjects->update();
+
+        return redirect()->route('subject-list')->with('success', 'Data Updated Successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Subject $subject)
+    public function destroy(Request $request, $id)
     {
-        //
+        $subjects = Subject::getSingle($id);
+        $subjects->is_delete = 1;
+        $subjects->save();
+        return redirect()->route('subject-list')->with('success', 'Data Deleted Successfully');
     }
 }

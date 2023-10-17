@@ -77,7 +77,7 @@ class AdminController extends Controller
 
         return redirect()->route('admin-list')->with('success', 'Data Updated Successfully');
     }
-    public function delete($id, Request $request)
+    public function delete(Request $request, $id)
     {
         $AdminsData = User::getSingle($id);
         $AdminsData->is_delete = 1;

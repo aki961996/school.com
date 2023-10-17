@@ -64,14 +64,11 @@ Route::middleware(['admin'])->group(function () {
 
     //subject urls
     Route::get('admin/subject/list', [SubjectController::class, 'index'])->name('subject-list');
-
-
-
-
-    //products usrl
-    Route::get('admin/product/list', [ProductController::class, 'index'])->name('product-list');
-    Route::get('admin/product/create', [ProductController::class, 'create'])->name('product-create');
-    Route::post('admin/product/store', [ProductController::class, 'store'])->name('product-store');
+    Route::get('admin/subject/add', [SubjectController::class, 'create'])->name('subject-add');
+    Route::post('admin/subject/store', [SubjectController::class, 'store'])->name('subject-store');
+    Route::get('admin/subject/edit/{id}', [SubjectController::class, 'edit'])->name('subject-edit');
+    Route::post('admin/subject/update', [SubjectController::class, 'update'])->name('subject-update');
+    Route::get('admin/subject/destroy/{id}', [SubjectController::class, 'destroy'])->name('subject-destroy');
 });
 
 Route::middleware(['teacher'])->group(function () {

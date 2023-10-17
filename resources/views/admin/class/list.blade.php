@@ -37,38 +37,25 @@
                 <div class="row">
                     {{-- name --}}
                     <div class="form-group col-sm-3">
-                        <label for="">Name</label>
+                        <label for="">Class Name</label>
                         <input type="text" name="name" value="{{Request::get('name')}}" class="form-control" id=""
                             placeholder="Enter name">
                     </div>
 
                     {{-- created by --}}
-                    <div>
+                    <div class="form-group">
                         <label for="created_by">Created By:</label>
-                        <select id="created_by" name="created_by">
-                            <option value="" selected disabled>Select a admin</option>
+                        <select class="form-control" id="" name="created_by">
+                            <option value="">Select a admin</option>
                             @foreach($users as $user)
                             <option value="{{ $user->id }}">{{ $user->name }}</option>
                             @endforeach
                         </select>
                     </div>
-                    {{-- status --}}
-                    <div>
-                        <label for="status">Status:</label>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="0"
-                                name="status">
-                            <label class="form-check-label" for="inlineCheckbox1">Active</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="1"
-                                name="status">
-                            <label class="form-check-label" for="inlineCheckbox2">Inactive</label>
-                        </div>
-                    </div>
-                    {{-- date --}}
+
+
                     <div class="form-group col-sm-3">
-                        <label for="exampleInputEmail1">Date</label>
+                        <label for="exampleInputEmail1">Created date</label>
                         <input type="date" name="date" value="{{Request::get('date')}}" class="form-control" id=""
                             placeholder="Enter date">
                     </div>
@@ -107,15 +94,15 @@
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th>Name</th>
+                                                    <th>Class Name</th>
                                                     <th>Status</th>
-                                                    <th>Created_by</th>
-                                                    <th>Created_date</th>
+                                                    <th>Created by</th>
+                                                    <th>Created date</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                
+
                                                 @foreach($classModel as $d)
                                                 <tr>
                                                     {{-- <th scope="row">{{$client->firstItem() + $loop->index}}</th>

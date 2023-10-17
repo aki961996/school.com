@@ -117,9 +117,9 @@ class ClassModel extends Model
 
         $name = request()->get('name');
         $created_by = request()->get('created_by');
-        $status = request()->get('status');
         $date = request()->get('date');
-        // dd($name);
+        //not do now in status
+        $status = request()->get('status');
         if (!empty($name)) {
             $return = $return->where('name', 'like', '%' . $name . '%');
         }
@@ -130,7 +130,7 @@ class ClassModel extends Model
             $return = $return->where('status', 'like', '%' . $status . '%');
         }
         if (!empty($date)) {
-            $return = $return->where('created_at', 'like', '%' . $name . '%');
+            $return = $return->whereDate('created_at', '=', $date);
         }
 
 

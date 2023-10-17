@@ -174,17 +174,6 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="{{url('admin/product/list')}}"
-                        class="nav-link @if(Request::segment(2) == 'product') active @endif">
-                        <i class="nav-icon far fa-user"></i>
-                        <p>
-                            Product
-                        </p>
-                    </a>
-                </li>
-
-
 
                 @elseif(Auth::user()->user_type == 2)
                 <li class="nav-item">
