@@ -5,7 +5,7 @@
 
 
 <div class="content-wrapper">
-    <h3 class="card-title">@include('message')</h3>
+    <h5 class="card-title">@include('message')</h5>
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
@@ -143,13 +143,49 @@
                                                     <td><a href="{{route('subject-edit', encrypt($data->id))}}"
                                                             class="btn btn-primary">Edit</a>
                                                     </td>
-                                                    <td><a href="{{route('subject-destroy',encrypt($data->id))}}"
+                                                    {{-- <td><a href="{{route('subject-destroy',encrypt($data->id))}}"
                                                             class="btn btn-danger">Delete</a>
-                                                    </td>
+                                                    </td> --}}
+                                                    <td><button class="btn btn-danger" data-toggle="modal"
+                                                            data-target="#deleteModal{{ $data->id }}">
+                                                            Delete
+                                                        </button></td>
+
+
+                                                    <!-- Delete Modal -->
+                                                    <div class="modal fade" id="deleteModal{{ $data->id }}"
+                                                        tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="deleteModalLabel">
+                                                                        Confirm Deletion</h5>
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Are you sure you want to delete this item?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-dismiss="modal">Cancel</button>
+                                                                    <button type="button" class="btn btn-danger"
+                                                                        onclick="confirmDelete({{ $data->id }})">Delete</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {{-- end delete modal --}}
+
                                                 </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
+
+
                                     </div>
 
                                     {{-- {{ $users->links() }} --}}

@@ -42,7 +42,7 @@
                                 <div class="form-group">
                                     <label>Type</label>
                                     <select class="form-control" name="type">
-                                        <option value="0">Select type</option>
+                                        <option value="">Select type</option>
                                         <option value="Theory">Theory</option>
                                         <option value="Practical">Practical</option>
                                     </select>
@@ -58,8 +58,6 @@
                                     </select>
 
                                     <div style="color: red">{{$errors->first('status')}}</div>
-
-
                                 </div>
 
 

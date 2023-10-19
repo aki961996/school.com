@@ -14,8 +14,8 @@
                     <h1>Admin List (Total : {{$users->total()}})</h1>
                 </div>
 
-                <div class="col-sm-6" style="text-align: right">
-                    <a href="{{route('admin-add')}}" class="btn btn-primary">Add new Admin</a>
+                <div class="col-sm-6 " style="text-align: right">
+                    <a href="{{route('admin-add')}}" id="AddNewAdmin" class="btn btn-primary">Add new Admin</a>
                 </div>
 
             </div>
@@ -155,5 +155,6 @@
     </section>
     <!-- /.content -->
 </div>
+
 
 @endsection

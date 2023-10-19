@@ -18,6 +18,7 @@ class SubjectController extends Controller
 
         $data['header_title'] = "Subject List";
         $data['getRecord'] = Subject::getRecord();
+
         //  dd($data);
 
         return view('admin.subject.list', $data);
@@ -92,7 +93,16 @@ class SubjectController extends Controller
     {
         $subjects = Subject::getSingle($id);
         $subjects->is_delete = 1;
-        $subjects->save();
-        return redirect()->route('subject-list')->with('success', 'Data Deleted Successfully');
+        $data =  $subjects->save();
+        // return redirect()->route('subject-list')->with('success', 'Data Deleted Successfully');
+
+        return response()->json(
+            [
+                'message' => 'Item deleted successfully',
+                'data' => $data
+
+            ]
+
+        );
     }
 }

@@ -68,7 +68,9 @@ Route::middleware(['admin'])->group(function () {
     Route::post('admin/subject/store', [SubjectController::class, 'store'])->name('subject-store');
     Route::get('admin/subject/edit/{id}', [SubjectController::class, 'edit'])->name('subject-edit');
     Route::post('admin/subject/update', [SubjectController::class, 'update'])->name('subject-update');
-    Route::get('admin/subject/destroy/{id}', [SubjectController::class, 'destroy'])->name('subject-destroy');
+    // Route::get('admin/subject/destroy/{id}', [SubjectController::class, 'destroy'])->name('subject-destroy');
+    //ajax req
+    Route::delete('admin/subject/destroy/{id}', [SubjectController::class, 'destroy'])->name('subject-destroy');
 });
 
 Route::middleware(['teacher'])->group(function () {

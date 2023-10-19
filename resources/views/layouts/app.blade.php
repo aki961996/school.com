@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-   
+
     <title>{{!empty($header_title) ? $header_title : ''}} - School</title>
 
     <!-- Google Font: Source Sans Pro -->
@@ -77,6 +77,8 @@
     <script src="{{asset('js/dist/js/demo.js')}}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{asset('js/dist/js/pages/dashboard.js')}}"></script>
+
+    <script src="{{asset('js/adminList.js')}}"></script>
 
     @yield('script')
 </body>
