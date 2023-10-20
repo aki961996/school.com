@@ -163,4 +163,16 @@ class ClassModel extends Model
     }
 
     protected $appends = ['status_text', 'created_by_text', "created_at_formated"];
+
+    static public function getClass()
+    {
+        $return = ClassModel::select('class_models.*')
+            ->join('users', 'users.id', 'class_models.created_by')
+            ->where('class_models.is_delete', '=', 0)
+            ->where('class_models.status', '=', 0)
+            ->orderBy('class_models.name', 'asc')
+            ->get();
+
+        return $return;
+    }
 }

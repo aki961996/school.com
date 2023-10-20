@@ -143,17 +143,17 @@
                                                     <td><a href="{{route('subject-edit', encrypt($data->id))}}"
                                                             class="btn btn-primary">Edit</a>
                                                     </td>
-                                                    {{-- <td><a href="{{route('subject-destroy',encrypt($data->id))}}"
+                                                    <td><a href="{{route('subject-destroy',encrypt($data->id))}}"
                                                             class="btn btn-danger">Delete</a>
-                                                    </td> --}}
-                                                    <td><button class="btn btn-danger" data-toggle="modal"
+                                                    </td>
+                                                    {{-- <td><button class="btn btn-danger" data-toggle="modal"
                                                             data-target="#deleteModal{{ $data->id }}">
                                                             Delete
-                                                        </button></td>
+                                                        </button></td> --}}
 
 
                                                     <!-- Delete Modal -->
-                                                    <div class="modal fade" id="deleteModal{{ $data->id }}"
+                                                    {{-- <div class="modal fade" id="deleteModal{{ $data->id }}"
                                                         tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
                                                         aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
@@ -177,7 +177,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
                                                     {{-- end delete modal --}}
 
                                                 </tr>

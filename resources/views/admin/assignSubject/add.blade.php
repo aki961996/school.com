@@ -2,20 +2,20 @@
 @section('content')
 @section('title','List')
 <div class="content-wrapper">
-
+    <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Class Add</h1>
+                    <h1>Assign Subject</h1>
                 </div>
 
                 <div class="col-sm-6" style="text-align: right">
-                    <a href="{{route('class-list')}}" class="btn btn-primary">Back</a>
+                    <a href="{{route('assign-subject-list')}}" class="btn btn-primary">Back</a>
                 </div>
 
             </div>
-        </div>
+        </div><!-- /.container-fluid -->
     </section>
 
     <section class="content">
@@ -25,17 +25,23 @@
                 <div class="col-md-12">
 
                     <div class="card card-primary">
+
+
                         <!-- form start -->
-                        <form action="{{ route('store') }}" method="post">
+                        <form action="{{route('assign-subject-add-P')}}" method="post">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="">Name</label>
-                                    <input type="text" name="name" value="" class="form-control" id=""
-                                        placeholder="Enter name">
-                                    {{-- <div style="color: red">{{$errors->first('name')}}</div> --}}
+                                    <label>Class Name</label>
+                                    <select class="form-control" name="status">
+                                        <option value="">Select Class</option>
+                                        @foreach($getClass as $ClassDataShow)
+                                        <option value="{{$ClassDataShow->id}}">{{$ClassDataShow->name}}</option>
+                                        @endforeach
+                                    </select>
 
                                 </div>
+
 
                                 <div class="form-group">
                                     <label>status</label>

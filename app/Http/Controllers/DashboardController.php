@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Upload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,6 +13,8 @@ class DashboardController extends Controller
 
         $data['header_title'] = 'Dashboard';
         if (Auth::user()->user_type == 1) {
+
+
             return view('admin.dashboard', $data);
         } elseif (Auth::user()->user_type == 2) {
             return view('teacher.dashboard', $data);

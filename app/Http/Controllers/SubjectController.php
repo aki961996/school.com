@@ -93,16 +93,16 @@ class SubjectController extends Controller
     {
         $subjects = Subject::getSingle($id);
         $subjects->is_delete = 1;
-        $data =  $subjects->save();
-        // return redirect()->route('subject-list')->with('success', 'Data Deleted Successfully');
+      $subjects->save();
+        return redirect()->route('subject-list')->with('success', 'Data Deleted Successfully');
 
-        return response()->json(
-            [
-                'message' => 'Item deleted successfully',
-                'data' => $data
+        // return response()->json(
+        //     [
+        //         'message' => 'Item deleted successfully',
+        //         'data' => $data
 
-            ]
+        //     ]
 
-        );
+        // );
     }
 }

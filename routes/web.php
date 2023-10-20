@@ -5,8 +5,10 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ForgetController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ClassModelController;
+use App\Http\Controllers\ClassSubjectModelController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\UploadController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
@@ -57,7 +59,7 @@ Route::middleware(['admin'])->group(function () {
     //class urls
     Route::get('admin/class/list', [ClassModelController::class, 'list'])->name('class-list');
     Route::get('admin/class/add', [ClassModelController::class, 'add'])->name('class-add');
-    Route::post('admin/class/add', [ClassModelController::class, 'ClassAdd'])->name('ClassAdd');
+    Route::post('admin/class/store', [ClassModelController::class, 'ClassAdd'])->name('store');
     Route::get('admin/class/edit/{id}', [ClassModelController::class, 'ClassEdit'])->name('ClassEdit');
     Route::get('admin/class/delete/{id}', [ClassModelController::class, 'classDelete'])->name('classDelete');
     Route::post('admin/class/update', [ClassModelController::class, 'classUpdate'])->name('classUpdate');
@@ -68,9 +70,23 @@ Route::middleware(['admin'])->group(function () {
     Route::post('admin/subject/store', [SubjectController::class, 'store'])->name('subject-store');
     Route::get('admin/subject/edit/{id}', [SubjectController::class, 'edit'])->name('subject-edit');
     Route::post('admin/subject/update', [SubjectController::class, 'update'])->name('subject-update');
-    // Route::get('admin/subject/destroy/{id}', [SubjectController::class, 'destroy'])->name('subject-destroy');
+    Route::get('admin/subject/destroy/{id}', [SubjectController::class, 'destroy'])->name('subject-destroy');
     //ajax req
-    Route::delete('admin/subject/destroy/{id}', [SubjectController::class, 'destroy'])->name('subject-destroy');
+    // Route::delete('admin/subject/destroy/{id}', [SubjectController::class, 'destroy'])->name('subject-destroy');
+
+    // assign subject url
+    Route::get('admin/assign_subject/list', [ClassSubjectModelController::class, 'index'])->name('assign-subject-list');
+    Route::get('admin/assign_subject/add', [ClassSubjectModelController::class, 'add'])->name('assign-subject-add');
+    Route::post('admin/class/add', [ClassSubjectModelController::class, 'assignSubjectsAdd'])->name('assign-subject-add-P');
+
+
+
+
+    //image demmy upload
+
+    // Route::get('admin/upload/list', [UploadController::class, 'index'])->name('list');
+    // Route::post('admin/upload/upload', [UploadController::class, 'store'])->name('store');
+    // Route::get('admin/upload/show', [UploadController::class, 'show'])->name('show');
 });
 
 Route::middleware(['teacher'])->group(function () {

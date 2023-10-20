@@ -29,10 +29,10 @@ class ClassModelController extends Controller
     public function add()
     {
         $users = User::all();
-
         $data['header_title'] = "Class Add";
         return view('admin.class.add', $data, ['users' => $users]);
     }
+
     public function ClassAdd(Request $request)
     {
 
