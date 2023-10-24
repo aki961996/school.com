@@ -83,7 +83,6 @@ Route::middleware(['admin'])->group(function () {
 
 
     //image demmy upload
-
     // Route::get('admin/upload/list', [UploadController::class, 'index'])->name('list');
     // Route::post('admin/upload/upload', [UploadController::class, 'store'])->name('store');
     // Route::get('admin/upload/show', [UploadController::class, 'show'])->name('show');

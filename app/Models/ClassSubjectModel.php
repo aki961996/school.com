@@ -24,8 +24,8 @@ class ClassSubjectModel extends Model
     //all data
     static public function getRecord()
     {
-        $return = Subject::select('subjects.*', 'users.name as created_by_name')
-            ->join('users', 'users.id', 'subjects.created_by');
+        $return = ClassSubjectModel::select('class_subject_models.*', 'users.name as created_by_name')
+            ->join('users', 'users.id', 'class_subject_models.created_by');
         // Use 0 instead of '= 0' for better readability
 
 
@@ -43,8 +43,8 @@ class ClassSubjectModel extends Model
             $return = $return->whereDate('subjects.created_at', "=", $date);
         }
 
-        $return =  $return->orderBy('subjects.id', 'desc')
-            ->where('subjects.is_delete', 0)
+        $return =  $return->orderBy('class_subject_models.id', 'desc')
+            ->where('class_subject_models.is_delete', 0)
             ->paginate(5);
 
         return $return;
@@ -62,4 +62,17 @@ class ClassSubjectModel extends Model
 
     //     return $return;
     // }
+
+    public function getStatusTextAttribute()
+    {
+        if ($this->status == 0) return 'Active';
+        else return 'Inactive';
+    }
+
+    public function getCreatedAtFormatedAttribute()
+    {
+        return date('d-m-Y H:i:s', strtotime($this->created_at));
+    }
+
+    protected $appends = ['status_text', 'created_at_formated'];
 }

@@ -93,7 +93,7 @@ class SubjectController extends Controller
     {
         $subjects = Subject::getSingle($id);
         $subjects->is_delete = 1;
-      $subjects->save();
+        $subjects->save();
         return redirect()->route('subject-list')->with('success', 'Data Deleted Successfully');
 
         // return response()->json(

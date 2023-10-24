@@ -111,25 +111,29 @@
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th>Name</th>
-                                                    <th>Email</th>
+                                                    <th>Class name</th>
+                                                    <th>Subject Name</th>
+                                                    <th>Status</th>
+                                                    <th>Created By</th>
                                                     <th>Created_at</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($users as $user)
+                                                @foreach ($users as $classandsubjectdata)
                                                 <tr>
                                                     {{-- <th scope="row">{{$client->firstItem() + $loop->index}}</th>
                                                     --}}
                                                     <td>{{$users->firstItem() + $loop->index}}</td>
-                                                    <td>{{$user->name}}</td>
-                                                    <td>{{$user->email}}</td>
-                                                    <td>{{$user->created_at_formated}}</td>
-                                                    <td><a href="{{route('edit', encrypt($user->id))}}"
+                                                    <td>{{$classandsubjectdata->class_id}}</td>
+                                                    <td>{{$classandsubjectdata->subject_id}}</td>
+                                                    <td>{{$classandsubjectdata->status_text}}</td>
+                                                    <td>{{$classandsubjectdata->created_by_name}}</td>
+                                                    <td>{{$classandsubjectdata->created_at_formated}}</td>
+                                                    <td><a href="{{route('edit', encrypt($classandsubjectdata->id))}}"
                                                             class="btn btn-primary">Edit</a>
                                                     </td>
-                                                    <td><a href="{{route('delete',encrypt($user->id))}}"
+                                                    <td><a href="{{route('delete',encrypt($classandsubjectdata->id))}}"
                                                             class="btn btn-danger">Delete</a>
                                                     </td>
                                                 </tr>

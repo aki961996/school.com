@@ -10,7 +10,7 @@ use Mockery\Matcher\Subset;
 
 class Subject extends Model
 {
-    use HasFactory ;
+    use HasFactory;
 
     protected $table = 'subjects';
 
@@ -22,7 +22,7 @@ class Subject extends Model
         "is_delete",
         "created_at"
     ];
-   
+
 
     static public function getRecord()
     {
@@ -48,6 +48,21 @@ class Subject extends Model
         $return =  $return->orderBy('subjects.id', 'desc')
             ->where('subjects.is_delete', 0)
             ->paginate(5);
+
+        return $return;
+    }
+
+
+
+    //get subject tabel data
+    static public function getSubject()
+    {
+        $return = Subject::select('subjects.*')
+            ->join('users', 'users.id', 'subjects.created_by')
+            ->where('subjects.is_delete', '=', 0)
+            ->where('subjects.status', '=', 0)
+            ->orderBy('subjects.name', 'asc')
+            ->get();
 
         return $return;
     }

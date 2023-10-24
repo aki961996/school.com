@@ -33,13 +33,26 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label>Class Name</label>
-                                    <select class="form-control" name="status">
+                                    <select class="form-control" name="name">
                                         <option value="">Select Class</option>
                                         @foreach($getClass as $ClassDataShow)
                                         <option value="{{$ClassDataShow->id}}">{{$ClassDataShow->name}}</option>
                                         @endforeach
                                     </select>
 
+                                </div>
+
+                    
+                                <div class="form-group">
+                                    <label>Subject Name</label>
+                                    @foreach($getSubject as $SubjectDataShow)
+                                    <div>
+                                        <label>
+                                            <input type="checkbox" name="subject" value="{{$SubjectDataShow->id}}">
+                                            {{$SubjectDataShow->name}}
+                                        </label>
+                                    </div>
+                                    @endforeach
                                 </div>
 
 
