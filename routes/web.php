@@ -77,7 +77,10 @@ Route::middleware(['admin'])->group(function () {
     // assign subject url
     Route::get('admin/assign_subject/list', [ClassSubjectModelController::class, 'index'])->name('assign-subject-list');
     Route::get('admin/assign_subject/add', [ClassSubjectModelController::class, 'add'])->name('assign-subject-add');
-    Route::post('admin/class/add', [ClassSubjectModelController::class, 'assignSubjectsAdd'])->name('assign-subject-add-P');
+    Route::post('admin/assign_subject/add', [ClassSubjectModelController::class, 'assignSubjectsAdd'])->name('assign-subject-add-P');
+    // Route::get('admin/assign_subject/edit/{id}', [ClassSubjectModelController::class, 'assignSubjectsEdit'])->name('assingSubEdit');
+
+
 
 
 

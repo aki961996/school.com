@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use function Laravel\Prompts\select;
+
 class ClassSubjectModel extends Model
 {
     use HasFactory;
@@ -21,47 +23,72 @@ class ClassSubjectModel extends Model
 
     ];
 
+    // static public function getAssignSubjectDataWithId($id = '')
+    // {
+
+    //     $return = ClassSubjectModel::select('class_subject_models.*', 'users.name as created_by_name', 'class_models.name as class_model_name', 'subjects.name as class_model_subject_name')
+
+    //         ->join('users', 'users.id', 'class_subject_models.created_by')
+    //         ->join('class_models', 'class_models.id', 'class_subject_models.class_id')
+    //         ->join('subjects', 'subjects.id', 'class_subject_models.subject_id');
+
+    //     if (!empty($id)) {
+    //         $return = $return->where('class_subject_models.id', "=", $id);
+    //     }
+
+    //     return   $return;
+    // }
+
+
+
+
     //all data
     static public function getRecord()
     {
-        $return = ClassSubjectModel::select('class_subject_models.*', 'users.name as created_by_name')
-            ->join('users', 'users.id', 'class_subject_models.created_by');
-        // Use 0 instead of '= 0' for better readability
 
 
-        $name = request()->get('name');
-        $type = request()->get('type');
+        $return = ClassSubjectModel::select('class_subject_models.*', 'users.name as created_by_name', 'class_models.name as class_model_name', 'subjects.name as class_model_subject_name')
+
+            ->join('users', 'users.id', 'class_subject_models.created_by')
+            ->join('class_models', 'class_models.id', 'class_subject_models.class_id')
+            ->join('subjects', 'subjects.id', 'class_subject_models.subject_id');
+
+
+
+        $class_name = request()->get('class_name');
+        //dd($class_name);
+        $sub_name = request()->get('sub_name');
         $date = request()->get('date');
-        if (!empty($name)) {
+        if (!empty($class_name)) {
 
-            $return = $return->where('subjects.name', 'like', '%' . $name . '%');
-            // dd($return);
-        } elseif (!empty($type)) {
-            $return = $return->where('subjects.type', "=", $type);
+            $return = $return->where('class_models.name', "=", $class_name);
+            
+        } elseif (!empty($sub_name)) {
+            $return = $return->where('subjects.name', "=", $sub_name);
         } elseif (!empty($date)) {
 
-            $return = $return->whereDate('subjects.created_at', "=", $date);
+            $return = $return->whereDate('class_subject_models.created_at', "=", $date);
         }
 
-        $return =  $return->orderBy('class_subject_models.id', 'desc')
+        // if (!empty($id)) {
+        //     $return = $return->where('class_subject_models.id', "=", $id);
+        // }
+
+
+
+        $return =  $return->orderBy('class_subject_models.id', 'asc')
             ->where('class_subject_models.is_delete', 0)
-            ->paginate(5);
+            ->paginate(20);
 
         return $return;
     }
 
-    // static public function getClass()
-    // {
-    //     $return = Subject::select('subjects.*', 'users.name as created_by_name')
-    //         ->join('users', 'users.id', 'subjects.created_by');
-
-
-    //     $return =  $return->orderBy('subjects.id', 'desc')
-    //         ->where('subjects.is_delete', 0)
-    //         ->paginate(5);
-
-    //     return $return;
-    // }
+    static public function getAlreadtFirts($class_id, $subject_id)
+    {
+        return self::where('class_id', '=', $class_id)
+            ->where('subject_id', '=', $subject_id)
+            ->first();
+    }
 
     public function getStatusTextAttribute()
     {
@@ -73,6 +100,7 @@ class ClassSubjectModel extends Model
     {
         return date('d-m-Y H:i:s', strtotime($this->created_at));
     }
+
 
     protected $appends = ['status_text', 'created_at_formated'];
 }

@@ -43,19 +43,20 @@
 
 
                     <div class="form-group col-sm-3">
-                        <label for="">Name</label>
-                        <input type="text" name="name" value="{{Request::get('name')}}" class="form-control" id=""
-                            placeholder="Enter name">
+                        <label for="">Class Name</label>
+                        <input type="text" name="class_name" value="{{Request::get('class_name')}}" class="form-control"
+                            id="" placeholder="Enter name">
 
 
                     </div>
                     <div class="form-group col-sm-3">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="text" name="email" value="{{Request::get('email')}}" class="form-control"
-                            id="exampleInputEmail1" placeholder="Enter email">
+                        <label for="">Subject Name</label>
+                        <input type="text" name="sub_name" value="{{Request::get('sub_name')}}" class="form-control"
+                            id="" placeholder="Enter name">
 
 
                     </div>
+
                     <div class="form-group col-sm-3">
                         <label for="exampleInputEmail1">Date</label>
                         <input type="date" name="date" value="{{Request::get('date')}}" class="form-control" id=""
@@ -121,17 +122,17 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($users as $classandsubjectdata)
+
                                                 <tr>
                                                     {{-- <th scope="row">{{$client->firstItem() + $loop->index}}</th>
                                                     --}}
                                                     <td>{{$users->firstItem() + $loop->index}}</td>
-                                                    <td>{{$classandsubjectdata->class_id}}</td>
-                                                    <td>{{$classandsubjectdata->subject_id}}</td>
+                                                    <td>{{$classandsubjectdata->class_model_name}}</td>
+                                                    <td>{{$classandsubjectdata->class_model_subject_name}}</td>
                                                     <td>{{$classandsubjectdata->status_text}}</td>
                                                     <td>{{$classandsubjectdata->created_by_name}}</td>
                                                     <td>{{$classandsubjectdata->created_at_formated}}</td>
-                                                    <td><a href="{{route('edit', encrypt($classandsubjectdata->id))}}"
-                                                            class="btn btn-primary">Edit</a>
+                                                    <td><a href="" class="btn btn-primary">Edit</a>
                                                     </td>
                                                     <td><a href="{{route('delete',encrypt($classandsubjectdata->id))}}"
                                                             class="btn btn-danger">Delete</a>
