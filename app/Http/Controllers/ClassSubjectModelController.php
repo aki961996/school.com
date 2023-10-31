@@ -22,7 +22,7 @@ class ClassSubjectModelController extends Controller
         $data['getClass'] = ClassModel::getClass();
         $data['getSubject'] = Subject::getSubject();
         // dd($data['getSubject']);
-        $data['header_title'] = "Assign Subject Add";
+        $data['header_title'] = " Add Assign Subject ";
         return view('admin.assignSubject.add', $data);
     }
 
@@ -58,16 +58,71 @@ class ClassSubjectModelController extends Controller
         }
     }
 
-    // public function assignSubjectsEdit($id, Request $request)
-    // {
-    //     $idGet = decrypt($id);
-    //     //print_r($idGet);
+    public function assignSubjectsEdit($id, Request $request)
+    {
+        $idGet = decrypt($id);
+        $data = ClassSubjectModel::getSingleData($idGet);
+        if (!empty($data)) {
 
-    //     $data = ClassSubjectModel::getRecord($idGet);
-    //     // echo "<pre>";
-    //     // print_r($data);
-    //     // exit();
+            $data['getRecord'] = $data;
+            //dd($data['getRecord']);
 
-    //     return view('admin.assignSubject.edit', ['dataAssignSubject' => $data]);
-    // }
+            $data['getAssignSubjectId'] = ClassSubjectModel::getAssignSubjectId($data->class_id);
+            // dd($data['getAssignSubjectId']);
+
+
+
+            $data['getClass'] = ClassModel::getClass();
+            $data['getSubject'] = Subject::getSubject();
+            $data['header_title'] = "Edit Assign Subject ";
+            return view('admin.assignSubject.edit', $data, ['dataAssignSubject' => $data]);
+        } else {
+            abort(404);
+        }
+    }
+
+    //delete
+    public function destroy($id)
+    {
+        $id = decrypt($id);
+
+        $save = ClassSubjectModel::getSingle($id);
+
+        $save->is_delete = 1;
+        $save->save();
+
+        return redirect()->route('assign-subject-list')->with('success', 'Data Deleted Successfully');
+    }
+
+    //update
+    public function update(Request $request)
+    {
+
+        $deleteSubjects = ClassSubjectModel::deleteSubject($request->class_id);
+
+        if (!empty($request->subject_id)) {
+
+
+            foreach ($request->subject_id as $subject_id) {
+
+                $getAlreadtFirts = ClassSubjectModel::getAlreadtFirts($request->class_id, $subject_id);
+                if (!empty($getAlreadtFirts)) {
+                    $getAlreadtFirts->status = $request->status;
+                    $getAlreadtFirts->save();
+                } else {
+
+                    $save = new ClassSubjectModel();
+                    $save->class_id = $request->class_id;
+                    $save->status = $request->status;
+                    // Use $subject_id instead of $request->subject.
+                    $save->subject_id = $subject_id;
+                    $save->created_by = Auth::user()->id;
+
+                    // Move the redirect outside of the loop.
+                    $save->save();
+                }
+            }
+        }
+        return redirect()->route('assign-subject-list')->with('success', 'Data Inserted Successfully');
+    }
 }

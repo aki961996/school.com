@@ -132,9 +132,10 @@
                                                     <td>{{$classandsubjectdata->status_text}}</td>
                                                     <td>{{$classandsubjectdata->created_by_name}}</td>
                                                     <td>{{$classandsubjectdata->created_at_formated}}</td>
-                                                    <td><a href="" class="btn btn-primary">Edit</a>
+                                                    <td><a href="{{route('assingSubEdit',encrypt($classandsubjectdata->id))}}"
+                                                            class="btn btn-primary">Edit</a>
                                                     </td>
-                                                    <td><a href="{{route('delete',encrypt($classandsubjectdata->id))}}"
+                                                    <td><a href="{{route('assign-subject-delete',encrypt($classandsubjectdata->id))}}"
                                                             class="btn btn-danger">Delete</a>
                                                     </td>
                                                 </tr>

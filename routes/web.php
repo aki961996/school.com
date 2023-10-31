@@ -78,7 +78,9 @@ Route::middleware(['admin'])->group(function () {
     Route::get('admin/assign_subject/list', [ClassSubjectModelController::class, 'index'])->name('assign-subject-list');
     Route::get('admin/assign_subject/add', [ClassSubjectModelController::class, 'add'])->name('assign-subject-add');
     Route::post('admin/assign_subject/add', [ClassSubjectModelController::class, 'assignSubjectsAdd'])->name('assign-subject-add-P');
-    // Route::get('admin/assign_subject/edit/{id}', [ClassSubjectModelController::class, 'assignSubjectsEdit'])->name('assingSubEdit');
+    Route::get('admin/assign_subject/edit/{id}', [ClassSubjectModelController::class, 'assignSubjectsEdit'])->name('assingSubEdit');
+    Route::get('admin/assign_subject/delete/{id}', [ClassSubjectModelController::class, 'destroy'])->name('assign-subject-delete');
+    Route::post('admin/assign_subject/update', [ClassSubjectModelController::class, 'update'])->name('assign-subject-update');
 
 
 

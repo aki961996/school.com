@@ -23,21 +23,23 @@ class ClassSubjectModel extends Model
 
     ];
 
-    // static public function getAssignSubjectDataWithId($id = '')
-    // {
 
-    //     $return = ClassSubjectModel::select('class_subject_models.*', 'users.name as created_by_name', 'class_models.name as class_model_name', 'subjects.name as class_model_subject_name')
 
-    //         ->join('users', 'users.id', 'class_subject_models.created_by')
-    //         ->join('class_models', 'class_models.id', 'class_subject_models.class_id')
-    //         ->join('subjects', 'subjects.id', 'class_subject_models.subject_id');
+    static public function getSingleData($idGet)
+    {
+        return self::find($idGet);
+    }
 
-    //     if (!empty($id)) {
-    //         $return = $return->where('class_subject_models.id', "=", $id);
-    //     }
 
-    //     return   $return;
-    // }
+
+
+    //delete get data
+    static public function getSingle($id)
+    {
+        return self::find($id);
+    }
+
+
 
 
 
@@ -62,7 +64,6 @@ class ClassSubjectModel extends Model
         if (!empty($class_name)) {
 
             $return = $return->where('class_models.name', "=", $class_name);
-            
         } elseif (!empty($sub_name)) {
             $return = $return->where('subjects.name', "=", $sub_name);
         } elseif (!empty($date)) {
@@ -88,6 +89,23 @@ class ClassSubjectModel extends Model
         return self::where('class_id', '=', $class_id)
             ->where('subject_id', '=', $subject_id)
             ->first();
+    }
+
+    //get subjects details
+    static public function getAssignSubjectId($class_id)
+    {
+
+        return self::where('class_id', '=', $class_id)
+            ->where('is_delete', '=', 0)
+
+            ->get();
+    }
+
+    //update
+    static public function deleteSubject($class_id)
+    {
+        return self::where('class_id', '=', $class_id)
+            ->delete();
     }
 
     public function getStatusTextAttribute()
