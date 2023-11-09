@@ -24,14 +24,10 @@ class ClassSubjectModel extends Model
     ];
 
 
-
     static public function getSingleData($idGet)
     {
         return self::find($idGet);
     }
-
-
-
 
     //delete get data
     static public function getSingle($id)
@@ -39,26 +35,16 @@ class ClassSubjectModel extends Model
         return self::find($id);
     }
 
-
-
-
-
-
     //all data
     static public function getRecord()
     {
-
-
         $return = ClassSubjectModel::select('class_subject_models.*', 'users.name as created_by_name', 'class_models.name as class_model_name', 'subjects.name as class_model_subject_name')
 
             ->join('users', 'users.id', 'class_subject_models.created_by')
             ->join('class_models', 'class_models.id', 'class_subject_models.class_id')
             ->join('subjects', 'subjects.id', 'class_subject_models.subject_id');
 
-
-
         $class_name = request()->get('class_name');
-        //dd($class_name);
         $sub_name = request()->get('sub_name');
         $date = request()->get('date');
         if (!empty($class_name)) {
@@ -70,16 +56,9 @@ class ClassSubjectModel extends Model
 
             $return = $return->whereDate('class_subject_models.created_at', "=", $date);
         }
-
-        // if (!empty($id)) {
-        //     $return = $return->where('class_subject_models.id', "=", $id);
-        // }
-
-
-
         $return =  $return->orderBy('class_subject_models.id', 'asc')
             ->where('class_subject_models.is_delete', 0)
-            ->paginate(20);
+            ->paginate(10);
 
         return $return;
     }

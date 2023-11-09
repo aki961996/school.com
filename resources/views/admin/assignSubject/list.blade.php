@@ -5,7 +5,7 @@
 
 
 <div class="content-wrapper">
-    <h3 class="card-title">@include('message')</h3>
+    {{-- <h3 class="card-title">@include('message')</h3> --}}
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
@@ -15,7 +15,8 @@
                 </div>
 
                 <div class="col-sm-6 " style="text-align: right">
-                    <a href="{{route('assign-subject-add')}}" id="AddNewAdmin" class="btn btn-primary">Add new Assign
+                    <a href="{{route('assign-subject-add')}}" id="AddNewAdmin" class="btn btn-primary btn-sm">Add new
+                        Assign
                         Subject</a>
                 </div>
 
@@ -66,9 +67,9 @@
 
                     <div class="form-group col-sm-3">
 
-                        <button class="btn btn-primary" type="submit" style="margin-top: 30px">Search</button>
+                        <button class="btn btn-primary btn-sm" type="submit" style="margin-top: 30px">Search</button>
 
-                        <a href="{{route('assign-subject-list')}}" class="btn btn-success"
+                        <a href="{{route('assign-subject-list')}}" class="btn btn-success btn-sm"
                             style="margin-top: 30px">Reset</a>
                     </div>
                 </div>
@@ -82,6 +83,7 @@
         </form>
     </div>
 
+   @include('message')
 
     {{-- add end --}}
 
@@ -133,10 +135,13 @@
                                                     <td>{{$classandsubjectdata->created_by_name}}</td>
                                                     <td>{{$classandsubjectdata->created_at_formated}}</td>
                                                     <td><a href="{{route('assingSubEdit',encrypt($classandsubjectdata->id))}}"
-                                                            class="btn btn-primary">Edit</a>
+                                                            class="btn btn-primary btn-sm">Edit</a>
+                                                    </td>
+                                                    <td><a href="{{route('editSingle',encrypt($classandsubjectdata->id))}}"
+                                                            class="btn btn-info btn-sm">Edit Single</a>
                                                     </td>
                                                     <td><a href="{{route('assign-subject-delete',encrypt($classandsubjectdata->id))}}"
-                                                            class="btn btn-danger">Delete</a>
+                                                            class="btn btn-danger btn-sm">Delete</a>
                                                     </td>
                                                 </tr>
                                                 @endforeach

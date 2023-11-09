@@ -5,7 +5,7 @@
 
 
 <div class="content-wrapper">
-    <h5 class="card-title">@include('message')</h5>
+    {{-- <h5 class="card-title">@include('message')</h5> --}}
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
@@ -90,7 +90,7 @@
         </form>
     </div>
 
-
+    @include('message')
     {{-- add end --}}
 
     <!-- Main content -->

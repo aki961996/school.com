@@ -11,8 +11,13 @@ class LoginController extends Controller
 {
     public function login()
     {
+
+
         if (!empty(Auth::check())) {
+
+
             if (Auth::user()->user_type == 1) {
+
                 return redirect()->route('admin-dashboard')->with('success', 'Login successfully');
             } elseif (Auth::user()->user_type == 2) {
                 return redirect()->route('teacher-dashboard')->with('success', 'Login successfully');
@@ -29,13 +34,18 @@ class LoginController extends Controller
     }
     public function AuthLogin(Request $request)
     {
+
         // $data = request()->all();
         // dd($data);
         // dd(hash::make(1234));
         $remember = !empty($request->remember) ? true : false;
+        //Auth::viaRemember();
         // dd($remember);
+
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
+
             if (Auth::user()->user_type == 1) {
+
                 return redirect()->route('admin-dashboard')->with('success', 'Login successfully');
             } elseif (Auth::user()->user_type == 2) {
                 return redirect()->route('teacher-dashboard')->with('success', 'Login successfully');

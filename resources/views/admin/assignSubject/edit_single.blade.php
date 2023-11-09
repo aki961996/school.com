@@ -7,11 +7,11 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Edit Assign Subject</h1>
+                    <h1>Edit Single Assign Subject</h1>
                 </div>
 
                 <div class="col-sm-6" style="text-align: right">
-                    <a href="{{route('assign-subject-list')}}" class="btn btn-primary">Back</a>
+                    <a href="{{route('assign-subject-list')}}" class="btn btn-primary btn-sm">Back</a>
                 </div>
 
             </div>
@@ -24,7 +24,7 @@
                 <div class="col-md-12">
                     <div class="card card-primary">
                         <!-- form start -->
-                        <form action="{{route('assign-subject-update')}}" method="post">
+                        <form action="" method="post">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
@@ -39,26 +39,15 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Subject Name</label>
-                                    @foreach($getSubject as $SubjectDataShow)
-                                    @php
-                                    $checked = '';
-                                    @endphp
-                                    @foreach($getAssignSubjectId as $subjectAssign)
-                                    @if($subjectAssign->subject_id == $SubjectDataShow->id )
-                                    @php
-                                    $checked = 'checked';
-                                    @endphp
-                                    @endif
-                                    @endforeach
-                                    <div>
-                                        <label>
-                                            <input {{$checked}} type="checkbox" name="subject_id[]"
-                                                value="{{$SubjectDataShow->id}}">
-                                            {{$SubjectDataShow->name}}
-                                        </label>
-                                    </div>
-                                    @endforeach
+                                    <select class="form-control" name="subject_id">
+                                        <option value="">Select Class</option>
+                                        @foreach($getSubject as $SubjectDataShow)
+                                        <option {{($getRecord->subject_id == $SubjectDataShow->id) ? 'selected' : ''}}
+                                            value="{{$SubjectDataShow->id}}">{{$SubjectDataShow->name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
+
                                 <div class="form-group">
                                     <label>status</label>
                                     <select class="form-control" name="status">
@@ -71,7 +60,7 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Update</button>
+                                <button type="submit" class="btn btn-primary btn-sm">Update</button>
                             </div>
                         </form>
                     </div>

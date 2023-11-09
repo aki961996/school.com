@@ -3,13 +3,13 @@
 @section('title','List')
 
 <div class="content-wrapper">
-    <h3 class="card-title">@include('message')</h3>
+    {{-- <h3 class="card-title">@include('message')</h3> --}}
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Class List </h1>
+                    <h1>Class List (Total : {{$classModel->total()}}) </h1>
                 </div>
 
                 <div class="col-sm-6" style="text-align: right">
@@ -68,6 +68,8 @@
             </div>
         </form>
     </div>
+
+    @include('message')
     {{-- add end --}}
     <!-- Main content -->
     <section class="content">

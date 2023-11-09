@@ -28,7 +28,30 @@ class User extends Authenticatable
         'email',
         'password',
         'id_delete',
-        "created_at"
+        "created_at",
+        "last_name",
+        'status',
+        'admission_number',
+
+        'roll_number',
+
+        'class_id',
+
+        'gender',
+        'date_of_birth',
+
+        'caste',
+        'religion',
+        'mobile_number',
+        'admission_date',
+        'profile_pic',
+
+        'blood_group',
+
+        'height',
+        'weight',
+
+
     ];
 
     /**
@@ -50,6 +73,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    static public function getSingleDataWithId($id)
+    {
+        return self::find($id);
+    }
 
 
 
@@ -93,7 +122,7 @@ class User extends Authenticatable
     //all data
     static public function getAdmin()
     {
-        $return = User::select('*')
+        $return = User::select('*', 'users.name as created_by_name')
             ->where('user_type', '=', 1)
             ->where('is_delete', "=", 0);
 
@@ -108,6 +137,23 @@ class User extends Authenticatable
         } elseif (!empty($date)) {
             $return = $return->whereDate('created_at', "=", $date);
         }
+
+        $return = $return->orderBy('id', 'desc')
+            ->paginate(5);
+
+        return $return;
+    }
+
+
+    //get student
+    static public function getStudent()
+    {
+
+        $return = User::select('*', 'users.name as created_by_name')
+            ->where('user_type', '=', 3)
+            ->where('is_delete', "=", 0);
+
+
 
         $return = $return->orderBy('id', 'desc')
             ->paginate(5);
@@ -136,5 +182,13 @@ class User extends Authenticatable
     {
         return date('d-m-Y H:i:s', strtotime($this->created_at));
     }
-    protected $appends = ['created_at_formated'];
+
+    //status
+
+    public function getStatusTextAttribute()
+    {
+        if ($this->status == 0) return 'Active';
+        else return 'Inactive';
+    }
+    protected $appends = ['created_at_formated', 'status_text'];
 }

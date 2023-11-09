@@ -68,7 +68,7 @@ class ClassSubjectModelController extends Controller
             //dd($data['getRecord']);
 
             $data['getAssignSubjectId'] = ClassSubjectModel::getAssignSubjectId($data->class_id);
-            // dd($data['getAssignSubjectId']);
+           // dd($data['getAssignSubjectId']);
 
 
 
@@ -123,6 +123,46 @@ class ClassSubjectModelController extends Controller
                 }
             }
         }
-        return redirect()->route('assign-subject-list')->with('success', 'Data Inserted Successfully');
+        return redirect()->route('assign-subject-list')->with('success', 'Data Updated Successfully');
+    }
+
+    public function editSingle(Request $request, $id)
+    {
+        $idGet = decrypt($id);
+        $data = ClassSubjectModel::getSingleData($idGet);
+        if (!empty($data)) {
+
+            $data['getRecord'] = $data;
+
+            $data['getClass'] = ClassModel::getClass();
+            $data['getSubject'] = Subject::getSubject();
+            $data['header_title'] = "Edit Single Assign Subject";
+            return view('admin.assignSubject.edit_single', $data, ['dataAssignSubject' => $data]);
+        } else {
+            abort(404);
+        }
+    }
+
+    public function  single_update(Request $request, $id)
+    {
+
+
+        $getAlreadtFirts = ClassSubjectModel::getAlreadtFirts($request->class_id, $request->subject_id);
+     
+        if (!empty($getAlreadtFirts)) {
+            $getAlreadtFirts->status = $request->status;
+            $getAlreadtFirts->save();
+
+            return redirect()->route('assign-subject-list')->with('success', 'Status Updated Successfully');
+        } else {
+            $idGet = decrypt($id);
+
+            $save = ClassSubjectModel::getSingleData($idGet);
+            $save->class_id = $request->class_id;
+            $save->status = $request->status;
+            $save->subject_id = $request->subject_id;
+            $save->save();
+            return redirect()->route('assign-subject-list')->with('success', 'Data Updated Successfully');
+        }
     }
 }
