@@ -18,6 +18,7 @@
         </div><!-- /.container-fluid -->
     </section>
 
+
     <section class="content">
         <div class="container-fluid">
             <div class="row">
@@ -80,7 +81,7 @@
 
                                     <div class="form-group col-md-6">
                                         <label for="">Gender <span style="color: red;">*</span></label>
-                                        <select name="gender" required class="form-control">
+                                        <select name="gender" class="form-control">
                                             <option value="">Select Gender</option>
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
@@ -95,8 +96,8 @@
 
                                     <div class="form-group col-md-6">
                                         <label for="">Date Of Birth <span style="color: red;">*</span></label>
-                                        <input type="date" name="date_of_birth" required
-                                            value="{{old('date_of_birth')}}" class="form-control" id="">
+                                        <input type="date" name="date_of_birth" value="{{old('date_of_birth')}}"
+                                            class="form-control" id="">
                                         <div style="color: red">{{$errors->first('date_of_birth')}}</div>
 
                                     </div>
@@ -128,8 +129,8 @@
 
                                     <div class="form-group col-md-6">
                                         <label for="">Admission Date <span style="color: red;">*</span></label>
-                                        <input type="date" name="admission_date" required
-                                            value="{{old('admission_date')}}" class="form-control" id="">
+                                        <input type="date" name="admission_date" value="{{old('admission_date')}}"
+                                            class="form-control" id="">
                                         <div style="color: red">{{$errors->first('admission_date')}}</div>
 
                                     </div>
@@ -166,7 +167,7 @@
 
                                     <div class="form-group col-md-6">
                                         <label for="">Status <span style="color: red;">*</span></label>
-                                        <select name="status" required class="form-control">
+                                        <select name="status" class="form-control">
                                             <option value="">Select Status</option>
                                             <option value="0">Active</option>
                                             <option value="1">Inactive</option>

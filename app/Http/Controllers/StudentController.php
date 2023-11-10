@@ -6,6 +6,8 @@ use App\Models\ClassModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Validator;
 
 class StudentController extends Controller
 {
@@ -21,12 +23,33 @@ class StudentController extends Controller
     {
         $data['getClass'] = ClassModel::getClass();
         $data['header_title'] = "Student Add";
+    
         return view('admin.student.add', $data);
     }
 
     public function store(Request $request)
     {
         //dd($request->all());
+
+        //validation
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'last_name' => 'required',
+
+            'password' => 'required',
+            'admission_number' => 'required|numeric',
+            'roll_number' => 'required|numeric',
+            'class_id' => 'required',
+            'date_of_birth' => 'required',
+            'gender' => 'required',
+            'status' => 'required',
+            'admission_date' => 'required',
+            'email' => 'required|unique:users,email,'
+
+
+        ]);
+        $validated = $validator->validated();
+        $validated = $validator->safe()->only(['name', 'email', 'password']);
 
         $student = new User();
         $student->name = trim($request->name);
