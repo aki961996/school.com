@@ -36,7 +36,6 @@ class StudentController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'last_name' => 'required',
-
             'password' => 'required',
             'admission_number' => 'required|numeric',
             'roll_number' => 'required|numeric',
@@ -46,12 +45,7 @@ class StudentController extends Controller
             'status' => 'required',
             'admission_date' => 'required',
             'email' => 'required|unique:users,email,',
-            'weight' => 'required',
-            'blood_group' => 'required',
-            'height' => 'required',
-
-
-
+        
 
         ]);
         $validated = $validator->validated();

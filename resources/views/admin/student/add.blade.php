@@ -84,7 +84,7 @@
                                         <select name="gender" class="form-control">
                                             <option value="">Select Gender</option>
                                             <option {{ (old('gender')=='Male' ) ? 'selected' :''}} value="Male">Male
-                                           
+
                                             </option>
                                             <option {{ (old('gender')=='Female' ) ? 'selected' :''}} value="Female">
                                                 Female</option>
@@ -199,6 +199,7 @@
                                             style="color: red;">*</span></label>
                                     <input type="password" name="password" class="form-control"
                                         id="exampleInputPassword1" placeholder="Password">
+                                    <div style="color: red">{{$errors->first('password')}}</div>
                                 </div>
 
 
