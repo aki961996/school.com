@@ -81,6 +81,14 @@ class User extends Authenticatable
     }
 
 
+    static public function getSingleWithId($id)
+    {
+        return self::find($id);
+    }
+
+    
+
+
 
     static public function getEmailSingle($email)
     {
@@ -191,4 +199,14 @@ class User extends Authenticatable
         else return 'Inactive';
     }
     protected $appends = ['created_at_formated', 'status_text'];
+
+
+
+    //id with data edit side
+    static  public function getSingleData($id)
+    {
+
+        $id = decrypt($id);
+        return self::find($id);
+    }
 }

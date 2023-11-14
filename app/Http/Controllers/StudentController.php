@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Validator;
 
+
 class StudentController extends Controller
 {
     public function index()
@@ -23,7 +24,7 @@ class StudentController extends Controller
     {
         $data['getClass'] = ClassModel::getClass();
         $data['header_title'] = "Student Add";
-    
+
         return view('admin.student.add', $data);
     }
 
@@ -44,7 +45,12 @@ class StudentController extends Controller
             'gender' => 'required',
             'status' => 'required',
             'admission_date' => 'required',
-            'email' => 'required|unique:users,email,'
+            'email' => 'required|unique:users,email,',
+            'weight' => 'required',
+            'blood_group' => 'required',
+            'height' => 'required',
+
+
 
 
         ]);
@@ -92,5 +98,95 @@ class StudentController extends Controller
 
 
         return redirect()->route('student-list')->with('success', 'data inserted success');
+    }
+
+    public function edit($id)
+    {
+
+        $data = User::getSingleData($id);
+        // dd($data['getSingleData']);
+        if (!empty($data)) {
+
+            $data['getRecord'] = $data;
+            //dd($data['getRecord']);
+
+
+            $data['getClass'] = ClassModel::getClass();
+            //dd($data['getClass']);
+
+            $data['header_title'] = "Edit student";
+            return view("admin.student.edit", $data, ['datas' => $data]);
+        } else {
+            abort(404);
+        }
+    }
+    public function StudentUpdate(Request $request)
+    {
+
+
+        $request->validate([
+
+            'name' => 'required',
+            'last_name' => 'required',
+            'admission_number' => 'required|numeric',
+            'roll_number' => 'required|numeric',
+            'class_id' => 'required',
+            'date_of_birth' => 'required',
+            'gender' => 'required',
+            'status' => 'required',
+            'admission_date' => 'required',
+
+            'password' => 'required',
+            'email' => 'required|unique:users,email,'
+
+        ]);
+
+        $id = $request->id;
+        $data = User::getSingleWithId($id);
+        if (!empty($data)) {
+            $data->name = trim($request->name);
+
+            $data->last_name = trim($request->last_name);
+            $data->email = trim($request->email);
+            $data->password = Hash::make($request->password);
+            $data->admission_number = trim($request->admission_number);
+            $data->roll_number = trim($request->roll_number);
+            $data->class_id = trim($request->class_id);
+            $data->gender = trim($request->gender);
+            if (!empty($request->date_of_birth)) {
+                $data->date_of_birth = trim($request->date_of_birth);
+            }
+            $data->caste = trim($request->caste);
+            $data->religion = trim($request->religion);
+            $data->mobile_number = trim($request->mobile_number);
+
+            if (!empty($request->admission_date)) {
+                $data->admission_date = trim($request->admission_date);
+            }
+
+            if (!empty($request->password)) {
+                $data->password = Hash::make($request->password);
+            }
+
+            $data->blood_group = trim($request->blood_group);
+            $data->height = trim($request->height);
+            $data->weight = trim($request->weight);
+            $data->status = trim($request->status);
+            $data->save();
+        }
+
+        return redirect()->route('student-list')->with('success', 'Data Updated Successfully');
+    }
+
+
+
+
+    public function destory($id)
+    {
+
+        $dataDelet = User::getSingle($id);
+        $dataDelet->is_delete = 1;
+        $dataDelet->save();
+        return redirect()->route('student-list')->with('success', 'Data Deleted Successfully');
     }
 }

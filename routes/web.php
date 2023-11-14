@@ -97,6 +97,9 @@ Route::middleware(['admin'])->group(function () {
     Route::get('admin/student/list', [StudentController::class, 'index'])->name('student-list');
     Route::get('admin/student/add', [StudentController::class, 'add'])->name('student-add');
     Route::post('admin/student/add', [StudentController::class, 'store'])->name('student-store');
+    Route::get('admin/student/edit/{id}', [StudentController::class, 'edit'])->name('student-edit');
+    Route::post('admin/student/update', [StudentController::class, 'StudentUpdate'])->name('student-update');
+    Route::get('admin/student/destroy/{id}', [StudentController::class, 'destory'])->name('student-destroy');
 
 
 

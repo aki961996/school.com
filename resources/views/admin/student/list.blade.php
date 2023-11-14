@@ -82,10 +82,10 @@
                                                     </td>
                                                     {{-- <td>{{$data->created_by_name}}</td> --}}
                                                     <td>{{$data->created_at_formated}}</td>
-                                                    <td><a href="{{route('subject-edit', encrypt($data->id))}}"
+                                                    <td><a href="{{route('student-edit', encrypt($data->id))}}"
                                                             class="btn btn-primary">Edit</a>
                                                     </td>
-                                                    <td><a href="{{route('subject-destroy',encrypt($data->id))}}"
+                                                    <td><a href="{{route('student-destroy',encrypt($data->id))}}"
                                                             class="btn btn-danger">Delete</a>
                                                     </td>
 
