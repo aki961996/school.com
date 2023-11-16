@@ -32,22 +32,16 @@ class User extends Authenticatable
         "last_name",
         'status',
         'admission_number',
-
         'roll_number',
-
         'class_id',
-
         'gender',
         'date_of_birth',
-
         'caste',
         'religion',
         'mobile_number',
         'admission_date',
         'profile_pic',
-
         'blood_group',
-
         'height',
         'weight',
 
@@ -86,7 +80,7 @@ class User extends Authenticatable
         return self::find($id);
     }
 
-    
+
 
 
 

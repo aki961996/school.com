@@ -7,6 +7,7 @@ use App\Models\ClassSubjectModel;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ClassSubjectModelController extends Controller
 {
@@ -28,6 +29,18 @@ class ClassSubjectModelController extends Controller
 
     public function assignSubjectsAdd(Request $request)
     {
+
+        Validator::make($request->all(), [
+            'class_id' => 'required',
+            'subject_id[]' => 'required',
+            'status' => 'required',
+
+
+
+        ]);
+
+
+
         if (!empty($request->subject_id)) {
 
 
@@ -68,7 +81,7 @@ class ClassSubjectModelController extends Controller
             //dd($data['getRecord']);
 
             $data['getAssignSubjectId'] = ClassSubjectModel::getAssignSubjectId($data->class_id);
-           // dd($data['getAssignSubjectId']);
+            // dd($data['getAssignSubjectId']);
 
 
 
@@ -148,7 +161,7 @@ class ClassSubjectModelController extends Controller
 
 
         $getAlreadtFirts = ClassSubjectModel::getAlreadtFirts($request->class_id, $request->subject_id);
-     
+
         if (!empty($getAlreadtFirts)) {
             $getAlreadtFirts->status = $request->status;
             $getAlreadtFirts->save();

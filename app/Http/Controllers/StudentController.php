@@ -45,8 +45,6 @@ class StudentController extends Controller
             'status' => 'required',
             'admission_date' => 'required',
             'email' => 'required|unique:users,email,',
-        
-
         ]);
         $validated = $validator->validated();
         $validated = $validator->safe()->only(['name', 'email', 'password']);

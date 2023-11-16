@@ -38,6 +38,7 @@
                                         @foreach($getClass as $ClassDataShow)
                                         <option value="{{$ClassDataShow->id}}">{{$ClassDataShow->name}}</option>
                                         @endforeach
+                                      
                                     </select>
 
                                 </div>
@@ -53,6 +54,7 @@
                                         </label>
                                     </div>
                                     @endforeach
+                                
                                 </div>
 
 
@@ -61,6 +63,7 @@
                                     <select class="form-control" name="status">
                                         <option value="0">Active</option>
                                         <option value="1">Inactive</option>
+                                      
                                     </select>
 
                                 </div>
