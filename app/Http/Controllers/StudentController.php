@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 
 class StudentController extends Controller
@@ -16,7 +17,7 @@ class StudentController extends Controller
     {
         $data['header_title'] = "Student List";
         $data['getRecord'] = User::getStudent();
-        // dd($data['getRecord']);
+    
         return view('admin.student.list', $data);
     }
 
@@ -127,17 +128,17 @@ class StudentController extends Controller
             'gender' => 'required',
             'status' => 'required',
             'admission_date' => 'required',
-
+            //'profile_pic' => 'required|image|mimes:jpeg,png,jpg,gif',
             'password' => 'required',
-            'email' => 'required|unique:users,email,'
+            'email' => 'required'
 
         ]);
 
         $id = $request->id;
         $data = User::getSingleWithId($id);
+
         if (!empty($data)) {
             $data->name = trim($request->name);
-
             $data->last_name = trim($request->last_name);
             $data->email = trim($request->email);
             $data->password = Hash::make($request->password);
@@ -148,10 +149,35 @@ class StudentController extends Controller
             if (!empty($request->date_of_birth)) {
                 $data->date_of_birth = trim($request->date_of_birth);
             }
+            //emailchechiking
+            $ema = $data->email = trim($request->email);
+            if ($ema) {
+                $ema = $data->email;
+                if ($ema) {
+                    $data->email = $ema;
+                }
+            }
+
+            //profilepic
+            // if ($request->hasFile('profile_pic')) {
+            //     Storage::delete('images/' . $data->profile_pic);
+            //     $extension = request('profile_pic')->extension();
+            //     $fileName = 'voice_pic_' . time() . '.' . $extension;
+            //     request('profile_pic')->storeAs('images', $fileName);
+
+            //     $data->profile_pic = $fileName;
+            // }
+            if ($request->hasFile('profile_pic') && $request->file('profile_pic')->isValid()) {
+                Storage::delete('images/' . $data->profile_pic);
+                $extension = request('profile_pic')->extension();
+                $fileName = 'voice_pic_' . time() . '.' . $extension;
+                request('profile_pic')->storeAs('images', $fileName);
+                $data->profile_pic = $fileName;
+            }
+
             $data->caste = trim($request->caste);
             $data->religion = trim($request->religion);
             $data->mobile_number = trim($request->mobile_number);
-
             if (!empty($request->admission_date)) {
                 $data->admission_date = trim($request->admission_date);
             }
@@ -159,7 +185,6 @@ class StudentController extends Controller
             if (!empty($request->password)) {
                 $data->password = Hash::make($request->password);
             }
-
             $data->blood_group = trim($request->blood_group);
             $data->height = trim($request->height);
             $data->weight = trim($request->weight);

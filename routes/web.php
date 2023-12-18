@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BotManController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ForgetController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ClassModelController;
 use App\Http\Controllers\ClassSubjectModelController;
+use App\Http\Controllers\DemoController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
@@ -104,6 +106,9 @@ Route::middleware(['admin'])->group(function () {
 
 
 
+    //demo
+    // Route::get('demo', [DemoController::class, 'demo'])->name('demo');
+    // Route::get('demo', [DemoController::class, 'get_name'])->name('demo');
 
     //image demmy upload
     // Route::get('admin/upload/list', [UploadController::class, 'index'])->name('list');

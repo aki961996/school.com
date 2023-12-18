@@ -17,9 +17,6 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next): Response
     {
 
-      
-
-
 
         if (!empty(Auth::check())) {
 

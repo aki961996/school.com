@@ -7,6 +7,8 @@
 
     <title>{{!empty($header_title) ? $header_title : ''}} - School</title>
 
+    
+
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -79,6 +81,10 @@
     <script src="{{asset('js/dist/js/pages/dashboard.js')}}"></script>
 
     <script src="{{asset('js/adminList.js')}}"></script>
+
+
+ 
+
 
     @yield('script')
 </body>

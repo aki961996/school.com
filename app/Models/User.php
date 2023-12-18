@@ -23,6 +23,10 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+
+    protected $table = "users";
+
     protected $fillable = [
         'name',
         'email',
@@ -48,6 +52,7 @@ class User extends Authenticatable
 
     ];
 
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -67,6 +72,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    public static function getAnilNmaData()
+    {
+
+        $return = User::select('*')
+            ->where('name', 'Student')->get();
+        return $return;
+    }
+
+    //learn some query
+
 
 
     static public function getSingleDataWithId($id)
@@ -151,14 +168,33 @@ class User extends Authenticatable
     static public function getStudent()
     {
 
-        $return = User::select('*', 'users.name as created_by_name')
-            ->where('user_type', '=', 3)
-            ->where('is_delete', "=", 0);
+        // $return = User::select('*', 'users.name as created_by_name')
+
+        //     // ->join('class_models', 'class_models.id', 'class_subject_models.class_id')
+
+        //     ->where('user_type', '=', 3)
+        //     ->where('is_delete', "=", 0);
 
 
 
-        $return = $return->orderBy('id', 'desc')
-            ->paginate(5);
+        // $return = $return->orderBy('id', 'desc')
+        //     ->paginate(5);
+
+        // return $return;
+
+        $return = User::select('users.*', 'users.name as created_by_name', 'class_models.name as class_model_name')
+
+            ->join('class_models', 'class_models.id', 'users.class_id')
+
+            // ->where('user_type', '=', 3)
+            // ->where('is_delete', "=", 0);
+
+
+            ->orderBy('users.id', 'asc')
+            ->where('users.user_type', 3)
+            ->where('users.is_delete', 0)
+
+            ->paginate(10);
 
         return $return;
     }
@@ -185,6 +221,19 @@ class User extends Authenticatable
         return date('d-m-Y H:i:s', strtotime($this->created_at));
     }
 
+    //dob
+    public function getDateOfBirthFormatedAttribute()
+    {
+
+        return date('d-m-Y', strtotime($this->date_of_birth));
+    }
+    //admission date admission_date
+    public function getAdmissionDateFormatedAttribute()
+    {
+
+        return date('d-m-Y', strtotime($this->date_of_birth));
+    }
+
     //status
 
     public function getStatusTextAttribute()
@@ -192,7 +241,7 @@ class User extends Authenticatable
         if ($this->status == 0) return 'Active';
         else return 'Inactive';
     }
-    protected $appends = ['created_at_formated', 'status_text'];
+    protected $appends = ['created_at_formated', 'status_text', 'date_of_birth_formated', 'admission_date_formated'];
 
 
 

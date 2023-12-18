@@ -16,6 +16,7 @@ class AdminController extends Controller
     public function list()
     {
 
+
         $data['header_title'] = "Admin List";
         $users = User::getAdmin();
         return view('admin.admin.list', $data, ['users' => $users]);
@@ -46,6 +47,7 @@ class AdminController extends Controller
         // $id = decrypt($id);
         // $AdminsData = User::find($id);
         $AdminsData = User::getSingle($id);
+
         // dd($AdminsData);
         if (!empty($AdminsData)) {
             $data['header_title'] = "Edit Admin";

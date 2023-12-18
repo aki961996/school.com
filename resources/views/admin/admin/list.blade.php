@@ -29,6 +29,8 @@
         <div class="card-header">
             <div class="card-title">
                 Search Admin List
+
+               
             </div>
         </div>
 
@@ -99,6 +101,9 @@
                                         <div class="card-title">
                                             Admin List
 
+
+
+
                                         </div>
 
                                         <div class="card-tools">
@@ -120,7 +125,8 @@
                                             <tbody>
                                                 @foreach ($users as $user)
                                                 <tr>
-                                                    {{-- <th scope="row">{{$client->firstItem() + $loop->index}}</th>
+                                                    {{-- <th scope="row">{{$client->firstItem() + $loop->index}}
+                                                    </th>
                                                     --}}
                                                     <td>{{$users->firstItem() + $loop->index}}</td>
                                                     <td>{{$user->name}}</td>

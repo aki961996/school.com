@@ -157,6 +157,11 @@
                                         <input type="file" name="profile_pic" class="form-control" id="">
                                         <div style="color: red">{{$errors->first('profile_pic' )}}</div>
 
+                                        <img style='width:100px;'
+                                            src="{{asset('storage/images/' . $datas->profile_pic) }}" alt="">
+
+
+
                                     </div>
 
                                     <div class="form-group col-md-6">
@@ -213,8 +218,8 @@
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Password <span
                                             style="color: red;">*</span></label>
-                                    <input type="password"  value="{{old('email',$datas->password)}}" name="password" class="form-control"
-                                        id="exampleInputPassword1" placeholder="Password">
+                                    <input type="password" value="{{old('email',$datas->password)}}" name="password"
+                                        class="form-control" id="exampleInputPassword1" placeholder="Password">
                                 </div>
 
 

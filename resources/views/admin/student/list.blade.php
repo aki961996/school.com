@@ -56,12 +56,23 @@
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th>Student Name</th>
-                                                    <th> Email</th>
-                                                    <th> Status</th>
-                                                    <th> Created By</th>
                                                     <th>Image</th>
-
+                                                    <th> Name</th>
+                                                    <th>Last Name</th>
+                                                    <th> Email</th>
+                                                    <th>Class Name</th>
+                                                    <th>Admission Number</th>
+                                                    <th>Roll Number </th>
+                                                    <th>Gender </th>
+                                                    <th>Date Of Birth</th>
+                                                    <th>Caste</th>
+                                                    <th>Religion</th>
+                                                    <th>Phone</th>
+                                                    <th>Admission Date</th>
+                                                    <th>Blood Group</th>
+                                                    <th>Height</th>
+                                                    <th>Weight</th>
+                                                    <th>Status</th>
                                                     <th>Created date</th>
                                                     <th>Actions</th>
                                                 </tr>
@@ -71,23 +82,41 @@
                                                 <tr>
                                                     {{-- <th scope="row">{{$client->firstItem() + $loop->index}}</th>
                                                     --}}
+
                                                     <td>{{$getRecord->firstItem() + $loop->index}}</td>
-                                                    <td>{{$data->name}}</td>
-                                                    <td>{{$data->email}}</td>
-                                                    <td>{{$data->status_text}}</td>
-                                                    <td>{{$data->created_by_name}}</td>
+
                                                     <td>
                                                         <img src="{{asset('storage/images/' . $data->profile_pic)}}"
                                                             alt="" style="width:100px;">
                                                     </td>
+                                                    <td>{{$data->name}}</td>
+                                                    <td>{{$data->last_name}}</td>
+                                                    <td>{{$data->email}}</td>
+                                                    <td>{{$data->class_model_name}}</td>
+                                                    <td>{{$data->admission_number}}</td>
+                                                    <td>{{$data->roll_number}}</td>
+                                                    <td>{{$data->gender}}</td>
+                                                    <td>{{$data->date_of_birth_formated}}</td>
+                                                    <td>{{$data->caste}}</td>
+                                                    <td>{{$data->religion}}</td>
+                                                    <td>{{$data->mobile_number}}</td>
+                                                    <td>{{$data->admission_date_formated}}</td>
+                                                    <td>{{$data->blood_group}}</td>
+                                                    <td>{{$data->height}}</td>
+                                                    <td>{{$data->weight}}</td>
+                                                    <td>{{$data->status_text}}</td>
+
                                                     {{-- <td>{{$data->created_by_name}}</td> --}}
                                                     <td>{{$data->created_at_formated}}</td>
                                                     <td><a href="{{route('student-edit', encrypt($data->id))}}"
-                                                            class="btn btn-primary">Edit</a>
+                                                            class="btn btn-outline-primary  btn-sm ">Edit</a>
                                                     </td>
-                                                    <td><a href="{{route('student-destroy',encrypt($data->id))}}"
-                                                            class="btn btn-danger">Delete</a>
+
+                                                    <td><a href="{{route('student-destroy', encrypt($data->id))}}"
+                                                            class="btn btn-outline-danger btn-sm delete-data">Delete</a>
                                                     </td>
+
+
 
 
                                                 </tr>
