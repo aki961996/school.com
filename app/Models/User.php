@@ -12,7 +12,12 @@ use Laravel\Sanctum\HasApiTokens;
 use Request;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Client\Request as ClientRequest;
+use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Request as FacadesRequest;
+use LDAP\Result;
+use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 
 class User extends Authenticatable
 {
@@ -167,34 +172,74 @@ class User extends Authenticatable
     //get student
     static public function getStudent()
     {
-
-        // $return = User::select('*', 'users.name as created_by_name')
-
-        //     // ->join('class_models', 'class_models.id', 'class_subject_models.class_id')
-
-        //     ->where('user_type', '=', 3)
-        //     ->where('is_delete', "=", 0);
-
-
-
-        // $return = $return->orderBy('id', 'desc')
-        //     ->paginate(5);
-
-        // return $return;
-
-        $return = User::select('users.*', 'users.name as created_by_name', 'class_models.name as class_model_name')
-
+        $return = User::select('users.*', 'class_models.name as class_models_name')
             ->join('class_models', 'class_models.id', 'users.class_id')
-
-            // ->where('user_type', '=', 3)
-            // ->where('is_delete', "=", 0);
-
-
-            ->orderBy('users.id', 'asc')
             ->where('users.user_type', 3)
-            ->where('users.is_delete', 0)
+            ->where('users.is_delete', 0);
 
+        //filtering 
+        if (!empty(Request::get('name'))) {
+            $return = $return->where('users.name', 'like', '%' . Request::get('name'));
+        }
+        if (!empty(Request::get('last_name'))) {
+            $return = $return->where('users.last_name', 'like', '%' . Request::get('last_name'));
+        }
+        if (!empty(Request::get('admission_number'))) {
+            //dd(Request::get('admission_number'));
+            $return = $return->where('users.admission_number', 'like',  '%' . Request::get('admission_number'));
+        }
+
+        if (!empty(Request::get('roll_number'))) {
+            $return = $return->where('users.roll_number', 'like' , '%' . Request::get('roll_number'));
+        }
+
+        if (!empty(Request::get('class'))) {
+            $return = $return->where('class_models.name', 'like', '%' . Request::get('class'));
+        }
+
+        if (!empty(Request::get('gender'))) {
+            $return = $return->where('users.gender', 'like', '%' . Request::get('gender'));
+        }
+
+        if (!empty(Request::get('caste'))) {
+            $return = $return->where('users.caste', 'like', '%' . Request::get('caste'));
+        }
+
+        if (!empty(Request::get('religion'))) {
+            $return = $return->where('users.religion', 'like', '%' . Request::get('religion'));
+        }
+
+        if (!empty(Request::get('mobile_number'))) {
+            $return = $return->where('users.mobile_number', 'like', '%' . Request::get('mobile_number'));
+        }
+        if (!empty(Request::get('email'))) {
+            $return = $return->where('users.email', 'like', '%' . Request::get('email'));
+        }
+
+        if (!empty(Request::get('admission_date'))) {
+
+            $return = $return->where('users.admission_date', 'like', '%' . Request::get('admission_date'));
+        }
+
+        if (!empty(Request::get('blood_group'))) {
+            $return = $return->where('users.blood_group', 'like', '%' . Request::get('blood_group'));
+        }
+
+        if (!empty(Request::get('status'))) {
+
+            $status = (Request::get('status') == 100) ? 0 : 1;
+            $return = $return->whereDate('users.status', "=", $status);
+        }
+
+        if (!empty(Request::get('date'))) {
+
+            $return = $return->whereDate('users.created_at', "=", Request::get('date'));
+        }
+        //filtering end
+
+        $return = $return->orderBy('users.id', 'desc')
             ->paginate(10);
+
 
         return $return;
     }
@@ -219,6 +264,7 @@ class User extends Authenticatable
     public function getCreatedAtFormatedAttribute()
     {
         return date('d-m-Y H:i:s', strtotime($this->created_at));
+        //return date('d-m-Y H:i:s', strtotime($this->created_at));
     }
 
     //dob
@@ -235,7 +281,6 @@ class User extends Authenticatable
     }
 
     //status
-
     public function getStatusTextAttribute()
     {
         if ($this->status == 0) return 'Active';
