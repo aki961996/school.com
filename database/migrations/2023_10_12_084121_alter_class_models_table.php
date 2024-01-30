@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('class_models', function (Blueprint $table) {
             $table->integer('created_by')->nullable()->after('status');
+            $table->tinyInteger('is_delete')->default(0)->comment('0:not,1:yes');
         });
     }
 

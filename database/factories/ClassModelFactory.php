@@ -21,7 +21,6 @@ class ClassModelFactory extends Factory
         return [
             'name' => fake()->name(),
             'status' => fake()->randomElement([0, 1]),
-
         ];
     }
 }

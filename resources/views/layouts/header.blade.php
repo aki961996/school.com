@@ -10,8 +10,6 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-
-
         <!-- Messages Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
@@ -111,8 +109,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="javascript::void" class="brand-link text-center">
-
-        <span class="brand-text font-weight-light ">School</span>
+        <span class="brand-text font-weight-light ">{{Auth::user()->name}}</span>
     </a>
 
     <!-- Sidebar -->
@@ -165,6 +162,16 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{url('admin/parent/list')}}"
+                        class="nav-link @if(Request::segment(2)== 'parent' ) active @endif">
+                        <i class="nav-icon far fa-user"></i>
+                        <p>
+                            Parents
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{url('admin/class/list')}}"
                         class="nav-link @if(Request::segment(2) == 'class') active @endif">
                         <i class="nav-icon far fa-user"></i>
@@ -203,7 +210,7 @@
                     </a>
                 </li>
 
-           
+
 
                 {{-- <li class="nav-item">
                     <a href="{{url('admin/upload/list')}}"

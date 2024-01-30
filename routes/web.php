@@ -8,6 +8,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ClassModelController;
 use App\Http\Controllers\ClassSubjectModelController;
 use App\Http\Controllers\DemoController;
+use App\Http\Controllers\ParentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
@@ -93,8 +94,6 @@ Route::middleware(['admin'])->group(function () {
     Route::get('admin/change_password', [UserController::class, 'change_password'])->name('change_password');
     Route::post('admin/change_password', [UserController::class, 'update_change_password']);
 
-
-
     //studentsroute
     Route::get('admin/student/list', [StudentController::class, 'index'])->name('student-list');
     Route::get('admin/student/add', [StudentController::class, 'add'])->name('student-add');
@@ -103,17 +102,9 @@ Route::middleware(['admin'])->group(function () {
     Route::post('admin/student/update', [StudentController::class, 'StudentUpdate'])->name('student-update');
     Route::get('admin/student/destroy/{id}', [StudentController::class, 'destory'])->name('student-destroy');
 
-
-
-
-    //demo
-    // Route::get('demo', [DemoController::class, 'demo'])->name('demo');
-    // Route::get('demo', [DemoController::class, 'get_name'])->name('demo');
-
-    //image demmy upload
-    // Route::get('admin/upload/list', [UploadController::class, 'index'])->name('list');
-    // Route::post('admin/upload/upload', [UploadController::class, 'store'])->name('store');
-    // Route::get('admin/upload/show', [UploadController::class, 'show'])->name('show');
+    //parents route
+    Route::get('admin/parent/list', [ParentController::class, 'index'])->name('parent-list');
+    Route::get('admin/parent/add', [ParentController::class, 'add'])->name('parent-add');
 });
 
 Route::middleware(['teacher'])->group(function () {

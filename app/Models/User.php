@@ -53,6 +53,7 @@ class User extends Authenticatable
         'blood_group',
         'height',
         'weight',
+        "occupation"
 
 
     ];
@@ -169,7 +170,7 @@ class User extends Authenticatable
     }
 
 
-    //get student
+    //get student all data
     static public function getStudent()
     {
         $return = User::select('users.*', 'class_models.name as class_models_name')
@@ -190,7 +191,7 @@ class User extends Authenticatable
         }
 
         if (!empty(Request::get('roll_number'))) {
-            $return = $return->where('users.roll_number', 'like' , '%' . Request::get('roll_number'));
+            $return = $return->where('users.roll_number', 'like', '%' . Request::get('roll_number'));
         }
 
         if (!empty(Request::get('class'))) {
@@ -239,6 +240,21 @@ class User extends Authenticatable
 
         $return = $return->orderBy('users.id', 'desc')
             ->paginate(10);
+
+
+        return $return;
+    }
+
+    //parents all data
+    public static function getParent()
+    {
+        $return = User::select('*', 'users.name as created_by_name')
+            ->where('user_type', '=', 4)
+            ->where('is_delete', "=", 0);
+
+
+        $return = $return->orderBy('id', 'desc')
+            ->paginate();
 
 
         return $return;

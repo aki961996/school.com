@@ -12,19 +12,23 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('admission_number', 50)->nullable()->after('is_delete');
+            $table->tinyInteger('is_delete')->default(0)->comment('0:not,1:yes');
+            $table->tinyInteger('user_type')->default(0)->comment('1:admin,2:teacher,3:student,4:parent');
+            $table->string('admission_number', 50)->nullable();
             $table->string('roll_number', 50)->nullable();
             $table->integer('class_id')->nullable();
             $table->string('gender', 50)->nullable();
+            $table->string('occupation', 50)->nullable();
             $table->date('date_of_birth')->nullable();
             $table->string('caste', 50)->nullable();
             $table->string('religion', 50)->nullable();
-            $table->string('mobile_number', 15)->nullable();
+            $table->string('mobile_number', 50)->nullable();
             $table->date('admission_date')->nullable();
             $table->string('profile_pic', 100)->nullable();
             $table->string('blood_group', 10)->nullable();
-            $table->string('height', 10)->nullable();
-            $table->string('weight', 10)->nullable();
+            $table->string('height', 50)->nullable();
+            $table->string('weight', 50)->nullable();
+            $table->string('address', 100)->nullable();
         });
     }
 

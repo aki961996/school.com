@@ -13,6 +13,6 @@ class ClassModelSeeder extends Seeder
      */
     public function run(): void
     {
-        ClassModel::factory()->count(10)->create();
+        ClassModel::factory()->count(1)->create();
     }
 }
