@@ -20,78 +20,74 @@
 </head>
 
 <body style="width: 100%; background:#eee">
-    <section class="h-100 gradient-form" style="background-color: #eee;">
-        <div class="container py-5 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-xl-10">
-                    <div class="card rounded-3 text-black">
-                        <div class="row g-0">
-                            <div class="col-lg-6">
-                                <div class="card-body p-md-5 mx-md-4">
 
-                                    <div class="text-center">
-                                        {{-- <img src="" style="width: 185px;" alt="logo"> --}}
-                                        <h4 class="mt-2 mb-4 pb-2">Enter The Smart School Era, Go Digital</h4>
+
+    <section class="">
+        <!-- Jumbotron -->
+        <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%)">
+            <div class="container">
+                <div class="row gx-lg-5 align-items-center">
+                    <div class="col-lg-6 mb-5 mb-lg-0">
+                        <h1 class="my-5 display-3 fw-bold ls-tight">
+                            An End To End Software Built <br />
+                            <span class="text-primary">For School, College, University</span>
+                        </h1>
+                        <p style="color: hsl(217, 10%, 50.8%)">
+                            Aki developed for you to increase efficiency of education management
+                        </p>
+                    </div>
+
+
+
+                    <div class="col-lg-6 mb-5 mb-lg-0">
+
+                        <div class="card">
+
+                            <div class="card-body py-5 px-md-5">
+                                @include('message')
+                                <form action="{{route('login')}}" method="post">
+                                    @csrf
+
+
+                                    <!-- Email input -->
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="form3Example3">Email address</label>
+                                        <input type="email" name="email" class="form-control" />
                                     </div>
-                                    @include('message')
 
-                                    <form action="{{route('login')}}" method="post">
-                                        @csrf
-                                        <p>Please login to your account</p>
+                                    <!-- Password input -->
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="form3Example4">Password</label>
+                                        <input type="password" name="password" class="form-control" />
+                                    </div>
 
-                                        <div class="form-outline mb-4">
-                                            <input type="email" name="email" id="form2Example11" class="form-control"
-                                                placeholder="" />
-                                            <label class="form-label" for="form2Example11">Email</label>
-                                        </div>
+                                    <!-- Checkbox -->
+                                    <div class="form-check d-flex justify-content-center mb-4">
+                                        <input class="form-check-input me-2" type="checkbox" name="remember"
+                                            id="remember" id="form2Example33" checked />
+                                        <label class="form-check-label" for="remember">
+                                            Remember Me
+                                        </label>
+                                    </div>
 
-                                        <div class="form-outline mb-4">
-                                            <input type="password" name="password" id="form2Example22"
-                                                class="form-control" />
-                                            <label class="form-label" for="form2Example22">Password</label>
-                                        </div>
-                                        <div class="col-8">
-                                            <div class="icheck-primary">
-                                                <input type="checkbox" name="remember" id="remember">
-                                                <label for="remember">
-                                                    Remember Me
-                                                </label>
-                                            </div>
-                                        </div>
+                                    <!-- Submit button -->
+                                    <div class="text-center pt-1 mb-5 pb-1">
+                                        <button type="submit" class="btn btn-primary btn-block mb-4">
+                                            Sign up
+                                        </button>
 
-                                        <div class="text-center pt-1 mb-5 pb-1">
-                                            <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
-                                                type="submit">Log
-                                                in</button>
-                                            <a href="{{route('forgot-password')}}">I forgot my password</a>
-                                        </div>
+                                        <a href="{{route('forgot-password')}}">I forgot my password</a>
+                                    </div>
 
-                                        <div class="d-flex align-items-center justify-content-center pb-4">
-                                            <p class="mb-0 me-2">Don't have an account?</p>
-                                            <button type="button" class="btn btn-outline-danger">Create new</button>
-                                        </div>
 
-                                    </form>
-
-                                </div>
-                            </div>
-                            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
-                                <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                                    <h4 class="mb-4">We are more than just a company</h4>
-                                    <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                                        do
-                                        eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                        quis
-                                        nostrud
-                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Jumbotron -->
     </section>
 
     <!-- jQuery -->
@@ -104,8 +100,6 @@
 </body>
 
 </html>
-
-
 
 
 {{--
