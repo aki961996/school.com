@@ -113,7 +113,7 @@
                                                     <td>{{$d->id}}</td>
                                                     <td>{{$d->name}}</td>
                                                     <td>{{$d->status_text}}</td>
-                                                    <td>{{$d->created_by_text}}</td>
+                                                    <td>{{$d->name_user}}</td>
                                                     <td>{{$d->created_at_formated}}</td>
                                                     <td><a href="{{route('ClassEdit', encrypt($d->id))}}"
                                                             class="btn btn-primary">Edit</a>

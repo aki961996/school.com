@@ -46,7 +46,7 @@ class ClassModelController extends Controller
         // $class_model->status = $request->status;
         // $class_model->created_by = auth()->user()->id;
         // dd($class_model->created_by);
-           $post = ClassModel::create([
+        $post = ClassModel::create([
             'name' => $validatedData['name'],
             'status' => $validatedData['status'],
             'created_by' => Auth::user()->id,

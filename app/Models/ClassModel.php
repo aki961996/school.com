@@ -106,31 +106,31 @@ class ClassModel extends Model
     //get all date
     static public function getAllAdminData()
     {
-        $return = ClassModel::select('*')
-
-            ->whereIn('status', [0, 1])
+        $return = ClassModel::select('class_models.*', 'users.name as name_user')
+            ->join('users', 'class_models.created_by', '=', 'users.id')
+            ->where('class_models.status', 0)
+            //->whereIn('status', [0, 1])
             // ->whereIn('class_models.is_delete', '=' 0);
-            ->where('is_delete', "=", 0);
-
-
-        // ->orWhereIn('value', ['red', 'white'])
+            ->where('class_models.is_delete', "=", 0);
 
         $name = request()->get('name');
+
         $created_by = request()->get('created_by');
         $date = request()->get('date');
         //not do now in status
-        $status = request()->get('status');
+        // $status = request()->get('status');
         if (!empty($name)) {
-            $return = $return->where('name', 'like', '%' . $name . '%');
+            $return = $return->where('class_models.name', 'like', '%' . $name);
+            // $return = $return->where('users.name', 'like', '%' . Request::get('name'));
         }
         if (!empty($created_by)) {
-            $return = $return->where('created_by', 'like', '%' . $created_by . '%');
+            $return = $return->where('class_models.created_by', 'like', '%' . $created_by);
         }
-        if (!empty($status)) {
-            $return = $return->where('status', 'like', '%' . $status . '%');
-        }
+        // if (!empty($status)) {
+        //     $return = $return->where('status', 'like', '%' . $status . '%');
+        // }
         if (!empty($date)) {
-            $return = $return->whereDate('created_at', '=', $date);
+            $return = $return->whereDate('class_models.created_at', '=', $date);
         }
 
 

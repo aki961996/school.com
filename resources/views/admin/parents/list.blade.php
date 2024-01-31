@@ -85,6 +85,7 @@
                                                 <tr>
                                                     <th>ID</th>
                                                     <th>Name</th>
+                                                    <th>Last Name</th>
                                                     <th>Email</th>
                                                     <th>Gender</th>
                                                     <th>Phone</th>
@@ -103,17 +104,19 @@
                                                     --}}
                                                     <td>{{$getRecord->firstItem() + $loop->index}}</td>
                                                     <td>{{$parent_data->name}}</td>
+                                                    <td>{{$parent_data->last_name}}</td>
                                                     <td>{{$parent_data->email}}</td>
                                                     <td>{{$parent_data->gender}}</td>
                                                     <td>{{$parent_data->mobile_number}}</td>
                                                     <td>{{$parent_data->occupation}}</td>
                                                     <td>{{$parent_data->address}}</td>
-                                                    <td>{{$parent_data->status_text}}</td>
+                                                    <td>{{($parent_data->status == 0) ? 'Active' : 'Inactive' }}</td>
+                                                    {{-- <td>{{$parent_data->status_text}}</td> --}}
                                                     <td>{{$parent_data->created_at_formated}}</td>
-                                                    <td><a href="{{route('edit', encrypt($parent_data->id))}}"
+                                                    <td><a href="{{route('parent-edit', encrypt($parent_data->id))}}"
                                                             class="btn btn-primary">Edit</a>
                                                     </td>
-                                                    <td><a href="{{route('delete',encrypt($parent_data->id))}}"
+                                                    <td><a href="{{route('parent-delete',encrypt($parent_data->id))}}"
                                                             class="btn btn-danger">Delete</a>
                                                     </td>
                                                 </tr>

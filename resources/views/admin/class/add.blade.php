@@ -33,7 +33,7 @@
                                     <label for="">Name</label>
                                     <input type="text" name="name" value="" class="form-control" id=""
                                         placeholder="Enter name">
-                                    {{-- <div style="color: red">{{$errors->first('name')}}</div> --}}
+                                    <div style="color: red">{{$errors->first('name')}}</div>
 
                                 </div>
 

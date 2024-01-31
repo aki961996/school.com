@@ -53,9 +53,8 @@ class User extends Authenticatable
         'blood_group',
         'height',
         'weight',
-        "occupation"
-
-
+        "occupation",
+        "address"
     ];
 
 
@@ -252,9 +251,13 @@ class User extends Authenticatable
             ->where('user_type', '=', 4)
             ->where('is_delete', "=", 0);
 
+        //filtering will come here
+
+
+
 
         $return = $return->orderBy('id', 'desc')
-            ->paginate();
+            ->paginate(5);
 
 
         return $return;

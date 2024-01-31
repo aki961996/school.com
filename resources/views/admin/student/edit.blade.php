@@ -195,7 +195,7 @@
                                             <option {{($getRecord->status == 0) ? 'selected' : ''}}
                                                 value="0">Active</option>
                                             <option {{($getRecord->status == 1) ? 'selected' : ''}}
-                                                value="0">Active</option>
+                                                value="1">Inactive</option>
 
 
                                         </select>

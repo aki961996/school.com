@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Student </h1>
+                    <h1>Student Add </h1>
                 </div>
 
                 <div class="col-sm-6" style="text-align: right">
@@ -175,8 +175,6 @@
                                             <option value="">Select Status</option>
                                             <option value="0">Active</option>
                                             <option value="1">Inactive</option>
-
-
                                         </select>
                                         <div style="color: red">{{$errors->first('status')}}</div>
 
@@ -215,5 +213,3 @@
             </div>
 
             @endsection
-
-           
