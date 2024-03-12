@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 use LDAP\Result;
 use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class User extends Authenticatable
 {
@@ -251,11 +252,31 @@ class User extends Authenticatable
             ->where('user_type', '=', 4)
             ->where('is_delete', "=", 0);
 
+
+
         //filtering will come here
+        if (!empty(Request::get('name'))) {
+            $return = $return->where('users.name', 'like', '%' . Request::get('name'));
+        }
 
+        if (!empty(Request::get('email'))) {
+            $return = $return->where('users.email', 'like', '%' . Request::get('email'));
+        }
 
+        if (!empty(Request::get('occupation'))) {
+            $return = $return->where('users.occupation', 'like', '%' . Request::get('occupation'));
+        }
+        if (!empty(Request::get('status'))) {
+            $status = (Request::get('status') == 100) ? 0 : 1;  //0is active 1 is inactive
 
+            $return = $return->whereDate('users.status', "=", $status);
+        }
 
+        if (!empty(Request::get('date'))) {
+            // dd(Request::get('date'));
+            $return = $return->whereDate('users.created_at', 'like', '%' . Request::get('date'));
+        }
+        //filtering end
         $return = $return->orderBy('id', 'desc')
             ->paginate(5);
 

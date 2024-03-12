@@ -17,7 +17,7 @@ class StudentController extends Controller
     {
         $data['header_title'] = "Student List";
         $data['getRecord'] = User::getStudent();
-    
+
         return view('admin.student.list', $data);
     }
 
@@ -205,5 +205,40 @@ class StudentController extends Controller
         $dataDelet->is_delete = 1;
         $dataDelet->save();
         return redirect()->route('student-list')->with('success', 'Data Deleted Successfully');
+    }
+
+    public function done()
+    {
+
+
+
+        // Define the words array
+        $words = array("pear", "apple", "orange", "banana", "lllllea", );
+
+        // Define the characters set
+        $charSet = array("E", "A", "R");
+
+        // Iterate through each word
+        foreach ($words as $word) {
+            // Convert word to uppercase for case-sensitive comparison
+            $upperWord = strtoupper($word);
+
+            // Initialize count for characters in the character set
+            $count = 0;
+
+            // Iterate through each character in the set
+            foreach ($charSet as $char) {
+                // Check if the character exists in the word
+                if (strpos($upperWord, $char) !== false) {
+                    // Increment count if the character is found
+                    $count++;
+                }
+            }
+
+            // If the count is greater than 0, print the word along with the count
+            if ($count > 0) {
+                echo "$word (Count: $count)\n";
+            }
+        }
     }
 }

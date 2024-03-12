@@ -27,20 +27,14 @@
         <div class="card-header">
             <div class="card-title">
                 Search Student List
-
-
             </div>
         </div>
 
         <!-- /.card-header -->
         <!-- form start -->
         <form action="" method="get">
-
-
             <div class="card-body">
                 <div class="row">
-
-
                     <div class="form-group col-sm-2">
                         <label for="">Name</label>
                         <input type="text" name="name" value="{{Request::get('name')}}" class="form-control" id=""

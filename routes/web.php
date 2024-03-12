@@ -102,6 +102,10 @@ Route::middleware(['admin'])->group(function () {
     Route::post('admin/student/update', [StudentController::class, 'StudentUpdate'])->name('student-update');
     Route::get('admin/student/destroy/{id}', [StudentController::class, 'destory'])->name('student-destroy');
 
+    //dummy
+    Route::get('admin/student/done', [StudentController::class, 'done']);
+    //dummy
+
     //parents route
     Route::get('admin/parent/list', [ParentController::class, 'index'])->name('parent-list');
     Route::get('admin/parent/add', [ParentController::class, 'add'])->name('parent-add');

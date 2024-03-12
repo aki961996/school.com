@@ -114,7 +114,6 @@ class ClassModel extends Model
             ->where('class_models.is_delete', "=", 0);
 
         $name = request()->get('name');
-
         $created_by = request()->get('created_by');
         $date = request()->get('date');
         //not do now in status

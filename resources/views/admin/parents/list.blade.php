@@ -44,11 +44,32 @@
                         <input type="text" name="email" value="{{Request::get('email')}}" class="form-control"
                             id="exampleInputEmail1" placeholder="Enter email">
                     </div>
+
+                    <div class="form-group col-sm-3">
+                        <label for=""> Occupation</label>
+                        <input type="text" name="occupation" value="{{Request::get('occupation')}}" class="form-control"
+                            id="" placeholder="Enter Occupation">
+                    </div>
+
+                    <div class="form-group col-sm-2">
+                        <label for="">Status</label>
+
+                        <select name="status" class="form-control">
+                            <option value="">Select Status</option>
+                            <option {{(Request::get('status')==100) ? 'Selected' : '' }} value="100">Active</option>
+                            <option {{(Request::get('status')==1) ? 'Selected' : '' }} value="1">Inactive</option>
+
+                        </select>
+                    </div>
+
                     <div class="form-group col-sm-3">
                         <label for="exampleInputEmail1">Date</label>
                         <input type="date" name="date" value="{{Request::get('date')}}" class="form-control" id=""
                             placeholder="Enter date">
                     </div>
+
+
+
                     <div class="form-group col-sm-3">
                         <button class="btn btn-primary" type="submit" style="margin-top: 30px">Search</button>
                         <a href="{{route('parent-list')}}" class="btn btn-success" style="margin-top: 30px">Reset</a>
