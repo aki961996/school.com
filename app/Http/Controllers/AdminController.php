@@ -38,6 +38,7 @@ class AdminController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->user_type = 1;
+        $user->status = 0;
         $user->save();
         return redirect()->route('admin-list')->with('success', 'New Admin successfully addedd');
     }
@@ -69,12 +70,15 @@ class AdminController extends Controller
         ]);
         $id = $request->id;
         $user = User::getSingleDate($id);
+
         $user->name = trim($request->name);
         $user->email = trim($request->email);
-
+        //pass undagil if kerum
         if (!empty($request->password)) {
             $user->password = Hash::make($request->password);
         }
+        //ellagil
+        
         $user->save();
 
         return redirect()->route('admin-list')->with('success', 'Data Updated Successfully');
@@ -83,6 +87,7 @@ class AdminController extends Controller
     {
         $AdminsData = User::getSingle($id);
         $AdminsData->is_delete = 1;
+        $AdminsData->status = 1;
         $AdminsData->save();
         return redirect()->route('admin-list')->with('success', 'Data Deleted Successfully');
     }

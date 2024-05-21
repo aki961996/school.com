@@ -33,9 +33,8 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>150</h3>
-
-                            <p>New Orders</p>
+                            <h3>{{$allUserCount}}</h3>
+                            <p>All Users</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-bag"></i>
@@ -48,9 +47,9 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>53<sup style="font-size: 20px">%</sup></h3>
+                            <h3>{{$adminCount}}<sup style="font-size: 20px"></sup></h3>
 
-                            <p>Bounce Rate</p>
+                            <p>Admin created</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
@@ -63,9 +62,9 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>44</h3>
+                            <h3>{{$studentCount}}</h3>
 
-                            <p>User Registrations</p>
+                            <p>Student Created</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
@@ -78,9 +77,24 @@
                     <!-- small box -->
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>65</h3>
+                            <h3>{{$teacherCount}}</h3>
 
-                            <p>Unique Visitors</p>
+                            <p>Teacher Created</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-pie-graph"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{$parentCount}}</h3>
+
+                            <p>Parent Created</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-pie-graph"></i>
@@ -90,7 +104,7 @@
                 </div>
                 <!-- ./col -->
             </div>
-           
+
             <!-- /.row -->
             <!-- Main row -->
             <div class="row">
@@ -101,9 +115,9 @@
                         <div class="card-header">
                             <h3 class="card-title">
                                 <i class="fas fa-chart-pie mr-1"></i>
-                                Sales
+                                Students Graph
                             </h3>
-                            <div class="card-tools">
+                            {{-- <div class="card-tools">
                                 <ul class="nav nav-pills ml-auto">
                                     <li class="nav-item">
                                         <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Area</a>
@@ -112,7 +126,7 @@
                                         <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> --}}
                         </div><!-- /.card-header -->
                         <div class="card-body">
                             <div class="tab-content p-0">
@@ -631,5 +645,31 @@
     </section>
     <!-- /.content -->
 </div>
+
+<script>
+    window.addEventListener("load", function() {
+        var ctx = document.getElementById('revenue-chart-canvas').getContext('2d');
+        var revenueChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Students'],
+                datasets: [{
+                    label: 'Student Count',
+                    data: [{{ $studentCount }}],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    });
+</script>
 
 @endsection

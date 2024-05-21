@@ -151,9 +151,11 @@ class User extends Authenticatable
             ->where('user_type', '=', 1)
             ->where('is_delete', "=", 0);
 
+        //search
         $email = request()->get('email');
         $name = request()->get('name');
         $date = request()->get('date');
+        //not do now in status
         if (!empty($email)) {
             // Code to handle when email is not empty
             $return = $return->where('email', 'like', '%' . $email . '%');
@@ -162,10 +164,10 @@ class User extends Authenticatable
         } elseif (!empty($date)) {
             $return = $return->whereDate('created_at', "=", $date);
         }
+        //search
 
-        $return = $return->orderBy('id', 'desc')
-            ->paginate(5);
-
+        $return = $return->orderBy('id', 'desc')->paginate(5);
+        
         return $return;
     }
 
