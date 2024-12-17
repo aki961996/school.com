@@ -80,7 +80,6 @@ class ParentController extends Controller
             'address' => 'required',
             'occupation' => 'required',
             'email' => 'required|unique:users,email',
-
         ]);
 
         $id = $request->id;
@@ -108,5 +107,15 @@ class ParentController extends Controller
         $delete_data->is_delete = 1;
         $delete_data->save();
         return redirect()->route('parent-list')->with('success', 'Parents data Deleted Successfully');
+    }
+
+    public function myStudent(Request $request, $id)
+    {
+        $data['parent_id'] = decrypt($id);
+        $data['header_title'] = "My student List";
+        $data['getRecord'] = User::getSearchStudents();
+
+        // $data['getStudent'] = User::getStudentByParent($data['parent_id']);
+        return view('admin.parents.my_student', $data);
     }
 }

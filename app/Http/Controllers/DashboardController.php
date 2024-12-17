@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Todo;
 use App\Models\Upload;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -11,7 +12,6 @@ class DashboardController extends Controller
 {
     public function dashboard()
     {
-
         $data['header_title'] = 'Dashboard';
         if (Auth::user()->user_type == 1) {
 
@@ -27,9 +27,11 @@ class DashboardController extends Controller
             if ($studentCount && $deletedCount) {
                 $studentCount -= $deletedCount;
             }
-            
+
             $parentCount = User::where('user_type', 4)->count();
             $allUserCount = User::count();
+
+            $todos = Todo::where('active', 1)->get();
             // Pass counts to the view
             return view('admin.dashboard', $data, [
                 'allUserCount' => $allUserCount,
@@ -37,16 +39,19 @@ class DashboardController extends Controller
                 'teacherCount' => $teacherCount,
                 'studentCount' => $studentCount,
                 'parentCount' => $parentCount,
+                'todos' => $todos
             ]);
 
             // return view('admin.dashboard', $data, ['allUserCount' => $allUserCount]);
         } elseif (Auth::user()->user_type == 2) {
-            return view('teacher.dashboard', $data);
+            $todos = Todo::where('active', 1)->get();
+            return view('teacher.dashboard', $data, ['todos' => $todos]);
         } elseif (Auth::user()->user_type == 3) {
-
-            return view('student.dashboard', $data);
+            $todos = Todo::where('active', 1)->get();
+            return view('student.dashboard', $data, ['todos' => $todos]);
         } elseif (Auth::user()->user_type == 4) {
-            return view('parent.dashboard', $data);
+            $todos = Todo::where('active', 1)->get();
+            return view('parent.dashboard', $data, ['todos' => $todos]);
         }
     }
     public function getCounts()

@@ -12,6 +12,7 @@ use App\Http\Controllers\ParentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\TodoController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
 use GuzzleHttp\Middleware;
@@ -50,14 +51,14 @@ Route::post('reset/{token}', [ForgetController::class, 'postReset'])->name('Post
 
 //middelwares
 Route::middleware(['admin'])->group(function () {
+
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard'])->name('admin-dashboard');
     Route::get('admin/admin/list', [AdminController::class, 'list'])->name('admin-list');
     Route::get('admin/admin/add', [AdminController::class, 'add'])->name('admin-add');
     Route::post('admin/admin/add', [AdminController::class, 'insert'])->name('add');
     Route::get('admin/admin/edit/{id}', [AdminController::class, 'edit'])->name('edit');
-    Route::post('admin/admin/update', [AdminController::class, 'update'])->name('Update');
+    Route::post('admin/admin/update', [AdminController::class, 'updaUpdatete'])->name('Update');
     Route::get('admin/admin/delete/{id}', [AdminController::class, 'delete'])->name('delete');
-
     //search
     // Route::get('admin/admin/search', [AdminController::class, 'search'])->name('search');
 
@@ -86,7 +87,6 @@ Route::middleware(['admin'])->group(function () {
     Route::get('admin/assign_subject/edit/{id}', [ClassSubjectModelController::class, 'assignSubjectsEdit'])->name('assingSubEdit');
     Route::get('admin/assign_subject/delete/{id}', [ClassSubjectModelController::class, 'destroy'])->name('assign-subject-delete');
     Route::post('admin/assign_subject/update', [ClassSubjectModelController::class, 'update'])->name('assign-subject-update');
-
     Route::get('admin/assign_subject/edit_single/{id}', [ClassSubjectModelController::class, 'editSingle'])->name('editSingle');
     Route::post('admin/assign_subject/edit_single/{id}', [ClassSubjectModelController::class, 'single_update']);
 
@@ -111,8 +111,13 @@ Route::middleware(['admin'])->group(function () {
     Route::get('admin/parent/add', [ParentController::class, 'add'])->name('parent-add');
     Route::post('admin/parent/store', [ParentController::class, 'store'])->name('parent-store');
     Route::get('admin/parents/edit/{id}', [ParentController::class, 'edit'])->name('parent-edit');
-    Route::post('admin/parents/update', [ParentController::class, 'update'])->name('parent-update');
-    Route::get('admin/parents/destroy/{id}', [ParentController::class, 'delete'])->name('parent-delete');
+    Route::post('admin/parent/update', [ParentController::class, 'update'])->name('parent-update');
+    Route::get('admin/parent/destroy/{id}', [ParentController::class, 'delete'])->name('parent-delete');
+    Route::get('admin/parent/my-student/{id}', [ParentController::class, 'myStudent'])->name('parent-myStudent');
+
+    //todo
+    // Route::get('todo', [TodoController::class, 'todo_list'])->name('todo_list');
+    Route::post('admin/todo', [TodoController::class, 'todo_post'])->name('todo');
 });
 
 Route::middleware(['teacher'])->group(function () {
@@ -120,15 +125,25 @@ Route::middleware(['teacher'])->group(function () {
 
     Route::get('teacher/change_password', [UserController::class, 'change_password']);
     Route::post('teacher/change_password', [UserController::class, 'update_change_password']);
+    //todo
+    Route::post('teacher/todo', [TodoController::class, 'todo_post'])->name('todo-teacher');
 });
 Route::middleware(['student'])->group(function () {
     Route::get('student/admin/dashboard', [DashboardController::class, 'dashboard'])->name('student-dashboard');
     Route::get('student/change_password', [UserController::class, 'change_password']);
     Route::post('student/change_password', [UserController::class, 'update_change_password']);
+    //todo
+    Route::post('student/todo', [TodoController::class, 'todo_post'])->name('todo-student');
 });
 
 Route::middleware(['parent'])->group(function () {
     Route::get('parent/admin/dashboard', [DashboardController::class, 'dashboard'])->name('parent-dashboard');
     Route::get('parent/change_password', [UserController::class, 'change_password']);
     Route::post('parent/change_password', [UserController::class, 'update_change_password']);
+
+    //todo
+    Route::post('parent/todo', [TodoController::class, 'todo_post'])->name('todo-parent');
 });
+
+
+Route::get('sorry', [TodoController::class, 'sorry']);

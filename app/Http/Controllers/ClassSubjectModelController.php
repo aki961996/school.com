@@ -30,22 +30,18 @@ class ClassSubjectModelController extends Controller
     public function assignSubjectsAdd(Request $request)
     {
 
+
         Validator::make($request->all(), [
             'class_id' => 'required',
             'subject_id[]' => 'required',
             'status' => 'required',
-
-
-
         ]);
 
 
 
         if (!empty($request->subject_id)) {
 
-
             foreach ($request->subject_id as $subject_id) {
-
                 $getAlreadtFirts = ClassSubjectModel::getAlreadtFirts($request->class_id, $subject_id);
                 if (!empty($getAlreadtFirts)) {
                     $getAlreadtFirts->status = $request->status;
@@ -141,6 +137,7 @@ class ClassSubjectModelController extends Controller
 
     public function editSingle(Request $request, $id)
     {
+        //  dd($request->all());
         $idGet = decrypt($id);
         $data = ClassSubjectModel::getSingleData($idGet);
         if (!empty($data)) {
@@ -158,9 +155,8 @@ class ClassSubjectModelController extends Controller
 
     public function  single_update(Request $request, $id)
     {
-
-
         $getAlreadtFirts = ClassSubjectModel::getAlreadtFirts($request->class_id, $request->subject_id);
+        //dd($getAlreadtFirts);
 
         if (!empty($getAlreadtFirts)) {
             $getAlreadtFirts->status = $request->status;
@@ -169,7 +165,6 @@ class ClassSubjectModelController extends Controller
             return redirect()->route('assign-subject-list')->with('success', 'Status Updated Successfully');
         } else {
             $idGet = decrypt($id);
-
             $save = ClassSubjectModel::getSingleData($idGet);
             $save->class_id = $request->class_id;
             $save->status = $request->status;

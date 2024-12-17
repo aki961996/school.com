@@ -167,7 +167,7 @@ class User extends Authenticatable
         //search
 
         $return = $return->orderBy('id', 'desc')->paginate(5);
-        
+
         return $return;
     }
 
@@ -285,6 +285,41 @@ class User extends Authenticatable
 
         return $return;
     }
+
+    static public function getSearchStudents()
+    {
+
+        $return = User::select('*', 'users.name as created_by_name')
+            ->where('user_type', '=', 3)
+            ->where('is_delete', "=", 0);
+
+        //filtering will come here
+        if (!empty(Request::get('name'))) {
+            $return = $return->where('users.name', 'like', '%' . Request::get('name'));
+        }
+        if (!empty(Request::get('last_name'))) {
+            $return = $return->where('users.last_name', 'like', '%' . Request::get('last_name'));
+        }
+
+        if (!empty(Request::get('email'))) {
+            $return = $return->where('users.email', 'like', '%' . Request::get('email'));
+        }
+
+
+
+        if (!empty(Request::get('date'))) {
+            // dd(Request::get('date'));
+            $return = $return->whereDate('users.created_at', 'like', '%' . Request::get('date'));
+        }
+        //filtering end
+        $return = $return->orderBy('id', 'desc')
+            ->paginate(5);
+
+
+        return $return;
+    }
+
+
 
     //accser
     // public function getCreatedAtAttribute($value)  //camel case ezhuthicha date of birth denote cheyum

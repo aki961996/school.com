@@ -358,6 +358,11 @@
                     </div>
                     <!--/.direct-chat -->
 
+
+                    {{-- todo modal --}}
+
+
+
                     <!-- TO DO List -->
                     <div class="card">
                         <div class="card-header">
@@ -379,6 +384,7 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <ul class="todo-list" data-widget="todo-list">
+                                @foreach($todos as $todo)
                                 <li>
                                     <!-- drag handle -->
                                     <span class="handle">
@@ -391,110 +397,83 @@
                                         <label for="todoCheck1"></label>
                                     </div>
                                     <!-- todo text -->
-                                    <span class="text">Design a nice theme</span>
+                                    <span class="text">{{$todo->todo_name}}</span>
                                     <!-- Emphasis label -->
-                                    <small class="badge badge-danger"><i class="far fa-clock"></i> 2
-                                        mins</small>
+                                    <small class="badge badge-danger"><i
+                                            class="far fa-clock"></i>{{$todo->created_at}}</small>
                                     <!-- General tools such as edit or delete-->
                                     <div class="tools">
-                                        <i class="fas fa-edit"></i>
+                                        <a href=""> <i class="fas fa-edit"></i></a>
                                         <i class="fas fa-trash-o"></i>
                                     </div>
                                 </li>
-                                <li>
-                                    <span class="handle">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </span>
-                                    <div class="icheck-primary d-inline ml-2">
-                                        <input type="checkbox" value="" name="todo2" id="todoCheck2" checked>
-                                        <label for="todoCheck2"></label>
-                                    </div>
-                                    <span class="text">Make the theme responsive</span>
-                                    <small class="badge badge-info"><i class="far fa-clock"></i> 4 hours</small>
-                                    <div class="tools">
-                                        <i class="fas fa-edit"></i>
-                                        <i class="fas fa-trash-o"></i>
-                                    </div>
-                                </li>
-                                <li>
-                                    <span class="handle">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </span>
-                                    <div class="icheck-primary d-inline ml-2">
-                                        <input type="checkbox" value="" name="todo3" id="todoCheck3">
-                                        <label for="todoCheck3"></label>
-                                    </div>
-                                    <span class="text">Let theme shine like a star</span>
-                                    <small class="badge badge-warning"><i class="far fa-clock"></i> 1
-                                        day</small>
-                                    <div class="tools">
-                                        <i class="fas fa-edit"></i>
-                                        <i class="fas fa-trash-o"></i>
-                                    </div>
-                                </li>
-                                <li>
-                                    <span class="handle">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </span>
-                                    <div class="icheck-primary d-inline ml-2">
-                                        <input type="checkbox" value="" name="todo4" id="todoCheck4">
-                                        <label for="todoCheck4"></label>
-                                    </div>
-                                    <span class="text">Let theme shine like a star</span>
-                                    <small class="badge badge-success"><i class="far fa-clock"></i> 3
-                                        days</small>
-                                    <div class="tools">
-                                        <i class="fas fa-edit"></i>
-                                        <i class="fas fa-trash-o"></i>
-                                    </div>
-                                </li>
-                                <li>
-                                    <span class="handle">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </span>
-                                    <div class="icheck-primary d-inline ml-2">
-                                        <input type="checkbox" value="" name="todo5" id="todoCheck5">
-                                        <label for="todoCheck5"></label>
-                                    </div>
-                                    <span class="text">Check your messages and notifications</span>
-                                    <small class="badge badge-primary"><i class="far fa-clock"></i> 1
-                                        week</small>
-                                    <div class="tools">
-                                        <i class="fas fa-edit"></i>
-                                        <i class="fas fa-trash-o"></i>
-                                    </div>
-                                </li>
-                                <li>
-                                    <span class="handle">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </span>
-                                    <div class="icheck-primary d-inline ml-2">
-                                        <input type="checkbox" value="" name="todo6" id="todoCheck6">
-                                        <label for="todoCheck6"></label>
-                                    </div>
-                                    <span class="text">Let theme shine like a star</span>
-                                    <small class="badge badge-secondary"><i class="far fa-clock"></i> 1
-                                        month</small>
-                                    <div class="tools">
-                                        <i class="fas fa-edit"></i>
-                                        <i class="fas fa-trash-o"></i>
-                                    </div>
-                                </li>
+                                @endforeach
+
                             </ul>
                         </div>
                         <!-- /.card-body -->
-                        <div class="card-footer clearfix">
+                        {{-- <div class="card-footer clearfix">
                             <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add
                                 item</button>
+                        </div> --}}
+                        <div class="container mt-5">
+                            <div class="card-footer clearfix">
+                                <!-- Button to trigger modal -->
+                                <button type="button" class="btn btn-primary float-right" data-toggle="modal"
+                                    data-target="#addItemModal">
+                                    <i class="fas fa-plus"></i> Add item
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <!-- /.card -->
+
+                    {{-- modal todo --}}
+                    <div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="addItemModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="addItemModalLabel">Add New Todo</h5>
+
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Form inside modal -->
+                                    <form action="{{route('todo')}}" method="POST">
+                                        @csrf
+                                        <div class="mb-3">
+                                            <label for="itemName" class="form-label">Todo Name</label>
+                                            <input type="text" name="todo_name" class="form-control" id="itemName"
+                                                placeholder="Enter Todo name">
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Save Item</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal -->
+
+
+                    {{-- end tod --}}
                 </section>
+
+
+
+
+
+
+
+
+
+
+
                 <!-- /.Left col -->
                 <!-- right col (We are only adding the ID to make the widgets sortable)-->
                 <section class="col-lg-5 connectedSortable">
@@ -646,18 +625,30 @@
     <!-- /.content -->
 </div>
 
+
+
 <script>
     window.addEventListener("load", function() {
         var ctx = document.getElementById('revenue-chart-canvas').getContext('2d');
         var revenueChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Students'],
+                labels: ['Admin', 'Teacher', 'Student', 'Parent'],
                 datasets: [{
-                    label: 'Student Count',
-                    data: [{{ $studentCount }}],
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
+                    label: 'User Count',
+                    data: [{{ $adminCount }}, {{ $teacherCount }}, {{ $studentCount }}, {{ $parentCount }}],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
                     borderWidth: 1
                 }]
             },
@@ -671,5 +662,9 @@
         });
     });
 </script>
+
+
+
+
 
 @endsection

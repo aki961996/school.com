@@ -12,8 +12,6 @@ class LoginController extends Controller
     public function login()
     {
 
-
-
         if (!empty(Auth::check())) {
 
 
@@ -40,7 +38,7 @@ class LoginController extends Controller
         //password 
         // dd(hash::make('password'));
         $remember = !empty($request->remember) ? true : false;
-         //Auth::viaRemember();
+        //Auth::viaRemember();
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
 
             if (Auth::user()->user_type == 1) {
